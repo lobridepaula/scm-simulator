@@ -1,15 +1,15 @@
 # M00-S01 — STORY_003: Core Architecture Decision Records
 
 Stage: **tasks-populated**  
-Document revision: **4**  
-Last editor: `software-architect`  
-Registration: **confirmed** (GitHub planning branch `planning/m00-s01-story-context`; draft PR #86; not merged into `main`)
+Document revision: **5**  
+Last editor: `scrum-master`  
+Registration: **confirmed** (`docs/sprints/M00-S01/STORY_003.md` merged into `main` via [PR #86](https://github.com/lobridepaula/scm-simulator/pull/86), merge commit `d686bf2f95ffc7d9554dbf320c3f4153c0c0c319`; current proposed revisions are under review in [draft PR #88](https://github.com/lobridepaula/scm-simulator/pull/88), not integrated)
 
 ## Story Context
 
 - **Repository:** [lobridepaula/scm-simulator](https://github.com/lobridepaula/scm-simulator)
 - **Sprint:** M00-S01 — Product Contract and T0 Foundations (first development Sprint)
-- **Target integration branch / inspected baseline:** `main` / `0b0046d45b577ba4db3de35c2d220440444db634`
+- **Target integration branch / evidence revisions:** `main`; original M00-S01 planning baseline `main@0b0046d45b577ba4db3de35c2d220440444db634` (historical); PR #88 review base `main@158d2773bc3ae40997185571a0c3319c619ea297`. All unmerged PR #88 work remains Proposed.
 - **Product Owner:** repository owner (business and substantive architecture decisions require explicit approval)
 - **Release constraint:** Full Release 1.0 from T0, M00–M09 gates, no MVP or temporary engine.
 - **Primary authority:** [SPEC](../../../SPEC.md) for behavior, [FEATURES](../../../FEATURES.md) for observable behavior, [ARCHITECTURE](../../../ARCHITECTURE.md) for structure, [ROADMAP](../../../ROADMAP.md) for milestones, [TODO](../../../TODO.md) for stable tasks, [AGENTS](../../../AGENTS.md) for change control.
