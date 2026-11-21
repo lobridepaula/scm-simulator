@@ -312,7 +312,7 @@ Alternative terminal paths:
 Required behavior:
 
 1. **Draft:** player selects either an AI supplier to buy from, or an AI customer's published buy request to quote against; choose the relevant origin/destination, product, quantity and price.
-2. **Submit:** validate the supplier offer or customer request, buyer budget and funds, seller available stock, destination capacity, route and requested quantity. Submission creates an auditable PO/SO-linked identifier only when the corresponding order is accepted.
+2. **Submit:** validate the supplier offer or customer request, buyer budget and funds, seller available stock, destination capacity, route and requested quantity. Submission creates an auditable order or quote reference and a recorded submitted/rejected outcome; confirmation, not submission, reserves stock, buyer funds and destination capacity. Both buyer-initiated POs and accepted seller quotes resolve to one canonical order.
 3. **Confirm:** supplier accepts only if feasible. Reserve seller stock and destination capacity; reserve/earmark buyer funds for the total purchase value **and inbound freight**, so subsequent orders cannot overcommit cash.
 4. **Dispatch:** release stock from the seller’s on-hand location into shipment custody and mark dispatched/in transit.
 5. **Transport:** shipping time depends on road-network distance and configured logistics speed. Minimum lead time is one simulation day.
