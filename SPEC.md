@@ -1,7 +1,7 @@
 # Supply Chain Simulator — Product and Technical Specification
 
 **Document:** `SPEC.md`  
-**Version:** 0.1 — Proposed baseline  
+**Version:** 0.2 — Expanded world and market baseline  
 **Status:** Draft for implementation  
 **Date:** 2026-11-21  
 **Target platform:** Web browser (desktop-first; responsive)  
@@ -11,7 +11,7 @@
 **Learners:** Brazilian students of the *Assistente Administrativo de Projetos* course  
 **Player language:** Brazilian Portuguese (`pt-BR`); internal source code, identifiers, and technical documentation: English
 
-> **Document intent:** This specification defines the first playable educational simulation and its extension boundaries. Statements marked **MUST**, **MUST NOT**, or **SHOULD** are implementation requirements; items marked **Later** are deliberately outside the initial release. Figures are preliminary gameplay parameters and MUST be tunable in scenario data, not hard-coded into engine logic.
+> **Document intent:** This document defines the complete Release 1.0 contract, implemented incrementally from T0 without a separately scoped MVP. Statements marked **MUST**, **MUST NOT**, and **SHOULD** govern requirements. Scenario balance is configurable; excluded capabilities require explicit change control.
 
 ---
 
@@ -54,27 +54,27 @@ The game MUST make the consequences of decisions visible. It MUST NOT require a 
 - The player creates or names a company and chooses an initial commercial product: **fruit**, **cheese**, or **furniture**.
 - The tutorial scenario grants a small starter retail establishment on a valid commercial lot, with the land/building reflected as opening assets. This prevents construction from blocking the first lesson.
 - The player receives an initial equity contribution, an operating cash balance, and access to supplier listings.
-- The city contains three autonomous AI companies with complementary and competing facilities.
+- The city contains **at least 40 simultaneously trade-accessible AI companies**, spanning complementary and competing sectors, with company formation and closure throughout play.
 - The player must issue at least one purchase order, receive the goods, sell them to consumers, and inspect the financial results.
 - Later in the same game, the player may buy an eligible lot, build another establishment, and buy from or sell to AI companies.
 
 The product choice determines the initial retail assortment, not a permanent company restriction. Vertical integration and diversification remain possible.
 
-### 3.2 Initial release — in scope
+### 3.2 Release 1.0 — in scope
 
-- Deterministic procedural city and four zone types.
+- Deterministic **320 × 240 tile (76,800 tile)** city, four zones, road hierarchy, districts and variable-sized lots.
 - Buyable lots, zoning restrictions, and location-based land prices.
 - Four establishment types: `store`, `factory`, `farm`, `warehouse`.
-- Configurable product catalog and manufacturing recipes.
+- Broad multi-category product catalog and configurable manufacturing recipes; fruit, cheese and furniture are educational starter chains, not the full catalog.
 - Distinct inventory per establishment.
 - Business-to-business (B2B) purchase/sales orders, delivery lifecycle, and receiving.
 - Basic consumer (B2C) retail sales and demand.
-- Rule-based AI companies as buyers, suppliers, and competitors.
+- At least 40 active, trade-accessible AI company counterparties at standard scenario day boundaries, with endogenous market entry, expansion, distress, liquidation and closure.
 - Cash accounting, recognized revenue, cost of goods sold, operating expenses, profit, ROI, and supporting metrics.
 - 30-day scenario, pause/advance-day control, basic tutorial, teacher scenario presets, local saving, and results export.
-- Simple 2D top-down city map with clickable lots and establishments.
+- Viewport-culled 2D city map with selectable lots, establishments, property overlays and a searchable market-company directory.
 
-### 3.3 Explicitly excluded from the initial release
+### 3.3 Explicitly excluded from Release 1.0
 
 - Multiplayer and synchronous student-to-student trading.
 - Realistic taxation, legal compliance, labor contracts, inflation, banking, debt, and credit terms.
@@ -89,19 +89,21 @@ These are extension candidates, not implicit implementation tasks.
 
 ## 4. World and Map
 
-### 4.1 Procedural generation
+### 4.1 Procedural generation and spatial hierarchy
 
-A map is generated from a text or numeric `seed` and a versioned `worldGenerationConfig`.
+The city is generated from a seed and versioned world generation configuration.
 
-- Default illustration: a **32 × 24** tile city. Tile count and lot dimensions remain configurable.
-- Generation MUST produce roads, contiguous districts, plots/lots, zoning, residential demand clusters, and AI starting facilities.
-- Every generated city MUST contain usable industrial, agricultural, residential, and commercial districts.
-- At least one commercial starter lot MUST be reachable by the road network from an initial supplier.
-- All active establishments MUST connect to the transport network.
-- Reusing the same seed and configuration MUST generate the same world, including market setup, unless the generator version is explicitly changed.
-- Different independent PRNG streams SHOULD be used for map, demand, AI, and events to avoid accidental cross-system coupling.
+- **Default city size MUST be 320 × 240 tiles (76,800 total)**. These are configurable dimensions, but the standard Release 1.0 test fixtures MUST use this default.
+- A tile is a terrain/rendering cell. A lot is a permanent, non-overlapping contiguous footprint of tiles. Districts group lots and residential demand with distinct geographic/economic profiles.
+- Generate major arterial roads, collector/local streets, downtown and secondary centers, industrial/logistics areas, agricultural edges and residential clusters. All four zoning types MUST be represented.
+- Generate road-connected rectangular or otherwise validated lots with sizes suitable for stores, factories, farms and warehouses; zoning and ownership are evaluated at the lot level.
+- All operational establishments MUST have road access. Shortest valid road-path distance determines transport time and freight costs.
+- Seeded company allocation MUST yield a player starter site and at least 40 distinct AI counterparties with viable supplier and/or customer opportunities; an inaccessible decorative firm does not count.
+- Seed, generator/scenario/catalog versions and ordered command history MUST reproduce the complete map, firm founding sequence, closures, orders and financial results. PRNG streams for world, demand, AI and market entry MUST be partitioned.
 
-**Map interaction:** pan, zoom, select lot, select establishment, and open corresponding information/management panels. A lightweight canvas or SVG implementation is acceptable; a 3D engine is unnecessary.
+**Generation order:** macro roads/districts → secondary roads/blocks → lots and zoning → population/land value → firms and facilities → route/market-coverage validation.
+
+**Map controls:** pan, zoom, select lot/facility, switch ownership/zone/market/transport overlays and navigate through non-map company/facility listings.
 
 ### 4.2 Zoning
 
@@ -119,7 +121,7 @@ A map is generated from a text or numeric `seed` and a versioned `worldGeneratio
 
 ### 4.3 Lots, accessibility, and land value
 
-Each lot has an ID, map position, zone, purchase price, owner, and optional establishment.
+Each lot has an immutable ID, contiguous tile footprint, zoning, connected road-access node, purchase price, owner and optional establishment. Footprints MUST NOT overlap roads or other lots.
 
 Land value SHOULD depend on a transparent simplified movement/accessibility index. For example:
 
@@ -132,6 +134,21 @@ where `accessibilityIndex` is a normalized, seeded approximation of nearby house
 - No visual pedestrian agents are required: activity may be represented by deterministic aggregated demand values.
 - Purchase of a lot is a capital investment, NOT an immediate operating expense.
 
+### 4.4 Development, ownership and retirement of facilities
+
+- A lot may have one operating establishment at a time; the company and lot remain separate entities, and companies may own many lots.
+- Construction validates ownership, zone, road access, footprint, funds and active company status.
+- Closing a facility or company MUST NOT silently delete the lot, free property ownership, erase order history, or invent a sale. Redevelopment and asset transfer are explicit recorded transactions.
+- Market attractiveness and lot pricing SHOULD use cached district/road aggregates rather than scan all tiles daily.
+
+### 4.5 Rendering and asset management
+
+- Prefer **Canvas 2D with viewport culling, reusable cached map chunks, and spatial indices for lot/facility hit-testing**; avoid a React/DOM node per tile.
+- Keep the economic world model independent of textures, UI coordinates and sprites.
+- Use a versioned asset manifest with locally served terrain, road, lot and facility sprites, a fallback for missing art, and recorded provenance/license.
+- **Kenney Tiny City** is a candidate visual baseline, pending verification of the actual pack, CC0 terms, redistribution rights and compatibility before bundling; other packs or original vector work may fill gaps.
+- No network image service or visual asset dependency is required while playing. Overlay labels/icons/patterns MUST supplement colors.
+
 ## 5. Economic Actors and Establishments
 
 ### 5.1 Companies
@@ -142,6 +159,9 @@ A company has an ID, owner type (`player` or `ai`), name, cash balance, equity c
 - Competitors MAY also be suppliers or customers.
 - Two companies MAY use the same product and compete for the same residential market.
 - Within-company goods movements MUST be recorded as **stock transfer orders**, not as external sales or company revenue.
+- Each company has a stable ID, industry, lifecycle state, founded day, facilities, offers/requests and ledger. One company can compete with and supply another.
+- **Trade-accessible** means discoverable in the company directory, reachable via the road network, operational and having at least one feasible B2B supplier offer and/or buyer purchasing opportunity under catalog rules.
+- Standard classroom scenarios MUST start with, and finish each completed simulated day with, **at least 40 distinct AI counterparties**, excluding the player. The guarantee refers to available counterparty choice, not mandatory transactions with 40 firms.
 
 ### 5.2 Establishment types
 
@@ -172,6 +192,8 @@ Each establishment MUST have a unique ID, company ownership, parent lot, current
 ### 6.1 Products
 
 Every product requires a unique ID, localized display name, unit, category, reference price, purchase/sale eligibility, and optional recipe.
+
+The broader Release 1.0 catalog MUST span multiple connected product families (including agricultural goods, raw materials, industrial inputs and finished consumer goods) and support realistic supplier/customer selection across the active companies. Product and recipe graphs MUST be validated for sources and viable buyers.
 
 Recommended starter chains:
 
@@ -336,26 +358,30 @@ A simple deterministic weighted-choice allocation across available stores is suf
 - A lower retail price SHOULD increase a store’s relative demand capture, but MUST NOT guarantee profitability.
 - Prices, quantities, and daily demand assumptions MUST be data-driven.
 
-## 9. AI Competitors
+## 9. AI Competitors and Company Ecology
 
-The initial release uses **rule-based economic agents**, not machine-learning models or LLMs.
+Release 1.0 uses **deterministic rule-based AI**, without paid generative models. The standard city contains 40 or more independently operating and trade-accessible AI companies, with diverse industries, product portfolios, prices, facility locations and purchasing preferences.
 
-Each AI company MUST be able to:
+### 9.1 Operating behavior
 
-1. Publish supplier offers based on available or producible goods.
-2. Respond to feasible submitted purchase orders.
-3. Replenish inventory when below a configurable target.
-4. Buy supplies from other AI companies or the player when relevant offers exist.
-5. Produce available recipes when inputs and cash permit.
-6. Adjust prices using bounded, interpretable rules.
-7. Sell products in retail stores and compete for household demand.
-8. Avoid transactions that violate stock, cash, or capacity invariants.
+AI firms MUST publish feasible offers and/or purchasing opportunities; respond to purchase orders; choose suppliers using cost, freight, reliability and lead time; replenish inventory; produce eligible recipes; compete for retail demand; and transact with player and AI customers. All decisions MUST issue the same typed, validated commands and obey the same economic constraints as the player. Strategies use configurable stock targets, price sensitivity, expansion thresholds and risk tolerance. Contention tie-breaks and AI evaluation order MUST be stable.
 
-AI strategies SHOULD be simple parameters such as `priceSensitivity`, `targetStockDays`, `supplierReliabilityWeight`, `expansionThreshold`, and `riskTolerance`.
+### 9.2 Founding, growth and closure
 
-For reproducibility, competing purchase decisions MUST execute in a stable, documented sequence. If multiple buyers seek limited inventory, the game MUST apply a declared allocation rule (e.g., earliest confirmed commitment wins). Expansion by AI is optional for the initial release; existing AI establishment networks are mandatory.
+An AI firm's lifecycle MUST be explicit: emerging, active/stable, growing, struggling, insolvent, liquidating and closed (or equivalent documented states). Financial insolvency rules in §10 remain authoritative; the lifecycle is not a second competing accounting state.
 
-AI MUST NOT have privileged access to future random events or hidden demand beyond its configured information model. Teacher scenarios MAY explicitly grant AI production/cash subsidies for balancing only if documented.
+- **Founding:** a deterministic market-opportunity process scores unmet demand, local competition, upstream inputs, prospective margin, site accessibility and initial capital. Entrants need a legal road-connected establishment and documented funded equity; never conjure stock or cash without ledger entries.
+- **Growth:** companies may buy lots, open facilities, expand product ranges or integrate vertically through ordinary commands.
+- **Retrenchment:** unprofitable firms may cut output, close facilities or liquidate assets; configurable consecutive-day thresholds prevent instant closures from one bad day.
+- **Insolvency and liquidation:** companies with insufficient funding stop creating ineligible new commitments. Existing accepted orders, reserved cash, shipments, title and property remain traceable and are settled, cancelled or resolved via explicit deterministic liquidation rules. Closure never deletes history or duplicates stock/funds.
+- **Market floor:** standard presets MUST support at least 40 trade-accessible AI firms after each completed simulation day, using a deterministically ordered, viable reserve entrant pipeline with scenario-documented initial equity. When an eligible replacement cannot be funded or located, validation MUST report an infeasible scenario rather than invent offers, cash or routes.
+- **Persistence:** preserve founding/closure dates, company IDs, asset transfers, transactions, PRNG state and next entrants in the save/replay stream.
+
+### 9.3 Bounded ecology evaluation
+
+Evaluate market entry/exit using indexed sector/district demand, offers, accessible lots and event triggers on configurable cadences, not all tiles for every AI firm each day. Stagger expensive company plans while preserving seeded reproducibility. No AI uses future information or privileged economic shortcuts.
+
+Market status changes are decided after financial posting; new entrants/facilities begin trading in the next day's order phase.
 
 ## 10. Finance and KPIs
 
@@ -415,8 +441,9 @@ One button advances the simulation by one day. Optionally, the player can advanc
 6. Process manufacturing/extraction using currently available inputs and capacity.
 7. Allocate household demand and generate retail sales receipts.
 8. Post daily operating expenses and business financial events.
-9. Recalculate metrics and append a day summary and structured event log.
-10. Advance the day counter.
+9. Apply market ecology: review distress, entry, growth, retreat, liquidation and closure; validate the 40-counterparty minimum and schedule next-day activation.
+10. Recalculate metrics and append a day summary and structured event log.
+11. Advance the day counter.
 
 A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of that same day. For simplicity, orders submitted on day `d` can arrive no earlier than day `d+1`.
 
