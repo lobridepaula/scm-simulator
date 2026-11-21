@@ -19,7 +19,7 @@ The architecture must accommodate the final specified system **from T0**: world 
 
 ## 2. Target Release 1.0: definition of completeness
 
-Release 1.0 supports: (a) reproducible **320 × 240 tile (76,800 tile)** city with district hierarchy, connected roads, variable-sized lots and four zones; (b) lot acquisition and lawful building/retirement of store/factory/farm/warehouse; (c) broad multi-category product networks, including guided fruit, cheese and furniture chains, with capacity-limited production/inventory; (d) authoritative B2B PO/SO workflows, shipments, receiving, settlement and internal transfers; (e) B2C retail demand, competition and pricing; (f) **at least 40 simultaneously accessible AI commercial counterparties** in standard presets, with deterministic founding, expansion, contraction, insolvency, liquidation and exit; (g) auditable financial ledger and KPIs; (h) full pt-BR interface, viewport-culling Canvas map, overlays and buyer/supplier directory; (i) 30-day teacher exercises, accessible workflows, local saves, reflection and CSV/JSON exports; and (j) CI plus static Vercel publication without login or paid services.
+Release 1.0 supports: (a) reproducible **320 × 240 tile (76,800 tile)** city with district hierarchy, connected roads, variable-sized lots and four zones; (b) lot acquisition and lawful building/retirement of store/factory/farm/warehouse; (c) at least **60 tradable SKUs in 10+ connected sectors**, including guided fruit, cheese and furniture chains, with validated production/supply/market paths; (d) supplier and B2B customer selection, customer demand listings, seller-initiated quotations, authoritative B2B PO/SO, shipments, receiving and internal transfers; (e) B2C retail demand, competition and pricing; (f) **50 starting AI companies and 40+ simultaneously accessible AI commercial counterparties** (including 15 suppliers and 15 B2B customers) in standard presets, with deterministic founding, expansion, contraction, insolvency, liquidation and exit; (g) auditable financial ledger and KPIs; (h) full pt-BR interface, viewport-culling Canvas map, overlays and buyer/supplier directory; (i) 30-day teacher exercises, accessible workflows, local saves, reflection and CSV/JSON exports; and (j) CI plus static Vercel publication without login or paid services.
 
 ### Invariants that apply to every milestone
 
@@ -72,7 +72,7 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** complete the geographic and ownership rules that constrain the economy.
 
-**Deliverables:** deterministic 320 × 240 tile world, arterial/collector/local road graph, shortest-path routing, four coherent zones, district demand clusters, variable-size non-overlapping purchasable lots, land price/accessibility indices, legal facility placement/ownership, starter lot, initial diverse 40+ viable AI company/facility network, chunkable map projections and accessible navigation.
+**Deliverables:** deterministic 320 × 240 tile world, arterial/collector/local road graph, shortest-path routing, four coherent zones, district demand clusters, variable-size non-overlapping purchasable lots, land price/accessibility indices, legal facility placement/ownership, starter lot, initial 50 AI companies with 40+ viable, independently owned and reachable trading options, chunkable map projections and accessible navigation.
 
 **Exit gate:** multi-seed standard fixtures yield exactly 76,800 tiles, valid lots and zones, full facility-road access and initial 40+ trade-accessible AI firms; placement rejection is atomic; land values, routes and projections replay deterministically.
 
@@ -80,7 +80,7 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** establish trustworthy stock and financial rules before transaction workflows depend on them.
 
-**Deliverables:** versioned products and recipes; per-facility stock with cost basis, reservations and inbound capacity; cash commitments and available funds; asset accounting for lot/building purchases; typed ledger entries; expense/insolvency policy; revenue, COGS, net profit, ROI and operational metric projections.
+**Deliverables:** versioned 60+-SKU/10+-sector product and recipe graphs; per-facility stock with cost basis, reservations and inbound capacity; cash commitments and available funds; asset accounting for lot/building purchases; typed ledger entries; expense/insolvency policy; revenue, COGS, net profit, ROI and operational metric projections.
 
 **Exit gate:** property/inventory purchases do not artificially create P&L expenses; no resource balance or capacity is overcommitted; reporting reconciles to ledger and inventory valuations; negative profit is supported without negative cash.
 
@@ -96,15 +96,15 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** close the operational loop from resources through production to household consumption.
 
-**Deliverables:** extraction and harvesting, recipe-based production and lead-time availability, all three initial product chains, capacity and processing costs, warehouse functions, household demand clusters, accessibility-based retail competition, bounded prices, daily sales receipts, stockout and service-level indicators.
+**Deliverables:** extraction and harvesting, 60+-SKU/10+-sector recipe and supply networks, lead-time availability and all three tutorial chains, capacity and processing costs, warehouse functions, household demand clusters, accessibility-based retail competition, bounded prices, daily sales receipts, stockout and service-level indicators.
 
 **Exit gate:** fruit, cheese and furniture work through valid supply chains; demand and stock limits are never exceeded; cost basis passes through production correctly; produced goods cannot be sold prematurely.
 
 ### M06 — Autonomous competitor economy
 
-**Objective:** sustain a competitive, evolving multi-sector city with at least 40 viable AI counterparties available for the player to select as suppliers/customers.
+**Objective:** sustain 50 initially generated firms with at least 40 actively reachable AI trading partners the player can select as suppliers or customers (including at least 15 of each role).
 
-**Deliverables:** multi-sector firm policies and offers/buyer demand; player and AI supplier/customer choice; fair contention; adaptive replenishment, pricing and production; endogenous company founding, lot acquisition, facility expansion/retrenchment, company distress, insolvency, liquidation, asset turnover and closure; funded entrant reserve maintaining the completed-day 40-counterparty minimum; auditable events and stable bounded decisions.
+**Deliverables:** 50 seeded firms, 60+ products/10+ sectors, publishable firm offers and buyer demand, accepted/rejected player-initiated sales quotations, player and AI supplier/customer choice; fair contention; adaptive replenishment, pricing and production; endogenous company founding, lot acquisition, facility expansion/retrenchment, company distress, insolvency, liquidation, asset turnover and closure; funded entrant reserve maintaining the completed-day 40-counterparty minimum; auditable events and stable bounded decisions.
 
 **Exit gate:** deterministic 30-day campaign preserves at least 40 viable, road-reachable AI counterparties at each completed day; verifies entering/exiting companies, asset/liability continuity, correct open-order handling, buyer/supplier access, shared rules and byte-identical replay.
 
@@ -112,7 +112,7 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** expose every committed domain capability through a coherent, accessible application, not isolated debugging panels.
 
-**Deliverables:** viewport-culling Canvas city view (320×240 default) with pan/zoom, lot selection, zone/ownership/competition/accessibility overlays, locally served licensed sprites, searchable/filterable directory of 40+ AI suppliers and customers, company lifecycle news, company/finance dashboards, purchase/sales/shipment forms, inventory and pricing panels, alerts, glossary and responsive pt-BR experience.
+**Deliverables:** viewport-culling Canvas city view (320×240 default) with pan/zoom, lot selection, zone/ownership/competition/accessibility overlays, locally served licensed sprites, searchable/filterable directory of 40+ AI trading partners with supplier/client needs and quote actions, company lifecycle news, company/finance dashboards, purchase/sales/shipment forms, inventory and pricing panels, alerts, glossary and responsive pt-BR experience.
 
 **Exit gate:** no mandatory action requires developer tools, raw JSON editing or map-only navigation; critical actions are operable with keyboard and pointer; financial and order displays match the engine.
 
