@@ -1,8 +1,8 @@
 # M00-S01 — STORY_001: Release 1.0 Requirements Traceability
 
 Stage: **tasks-populated**  
-Document revision: **5**  
-Last editor: `project-manager`  
+Document revision: **6**  
+Last editor: `quality-auditor`  
 Registration: **confirmed** (GitHub planning branch `planning/m00-s01-story-context`; draft PR #86; not merged into `main`)
 
 ## Story Context
@@ -58,6 +58,6 @@ Changing business rules, accepting ADRs, moving feature scope to later releases,
 | TL-003 | Software Architect | Independently check every mapped requirement's owner, domain interfaces and architectural invariant against ARCHITECTURE §§4–8, 11 and 19; report conflicting or missing ownership, read-only. | Source-linked module/contract ownership review returned to Project Manager for the same index. | Quality Auditor | To do | Depends on TL-001; advisory review only; do not edit the matrix concurrently. |
 | TL-004 | Project Manager | Reconcile index links with README, SPEC §17, ROADMAP and TODO full Release 1.0 strategy; identify contradictory, missing or unapproved scope statements without altering authorities. | Explicit requirement/feature/task/learning gap and conflict section in the same matrix with proposed corrections for PO review. | Quality Auditor | To do | Depends on TL-002 and TL-003; #1 is baseline gate G1. |
 | TL-005 | Project Manager | Specify reproducible bidirectional completeness, stable-row-key, orphan-ID and source-link checks with negative cases; run only using available authorized tooling and record actual results. | Documented validation procedure and real outputs where run, otherwise `not run` with concrete missing setup. | Quality Auditor | To do | Depends on TL-002 and TL-004; no CI/scaffold exists at kickoff. |
-| TL-006 | Quality Auditor | Independently review the complete index for coverage of each SPEC section, F01–F16, J01–J05, all SPEC §16 gates, duplicates and evidence-status integrity; return a bounded findings verdict. | Source-SHA-linked independent coverage report and G1 pass/fail/partial recommendation to Scrum Master. | Scrum Master | Blocked | Waiting for TL-001–TL-005 and actual reviewable matrix revision; no QA performed. |
+| TL-006 | Quality Auditor | Independently review the complete index for coverage of each SPEC section, F01–F16, J01–J05, all SPEC §16 gates, duplicates and evidence-status integrity; return a bounded findings verdict. | Source-SHA-linked independent coverage report and G1 pass/fail/partial recommendation to Scrum Master. | Scrum Master | Blocked | [QA review on PR #87](https://github.com/lobridepaula/scm-simulator/pull/87#issuecomment-7060363743): structural checks passed at `57eb3d5`; overall PARTIAL; TL-003–TL-005, semantic sign-off and CI still pending, so G1 remains blocked. |
 
 **Handoff:** Tasks are allocated to verified plugin roles for proposed execution only. Scrum Master owns dispatch and Story acceptance; PO approval and branch-write authorization remain separate. Task Coordinator has not invoked any specialist.
