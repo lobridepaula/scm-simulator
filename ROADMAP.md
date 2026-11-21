@@ -88,7 +88,7 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** deliver the **complete order lifecycle** using M01–M03 rules, without special treatment for the player.
 
-**Deliverables:** supplier offers, quote comparison including freight and lead time, single authoritative B2B order with PO/SO projections, status transitions, cancellation/rejection, seller stock and buyer fund/capacity reservation, dispatch, in-transit custody, delivery, receipt, settlement, internal stock transfers, shipment and order history.
+**Deliverables:** supplier offers **and AI customer procurement requests**, player choice of named suppliers/buyers and sales quotes, quote comparison including freight and lead time, single authoritative B2B order with PO/SO projections for either trade direction, status transitions, cancellation/rejection, seller stock and buyer fund/capacity reservation, dispatch, in-transit custody, delivery, receipt, settlement, internal stock transfers, shipment and order history.
 
 **Exit gate:** full B2B and internal-transfer workflows pass automated integration tests, including simultaneous contention, failed paths, repeated receipt, cancellation and exact-once financial posting.
 
