@@ -42,7 +42,7 @@ Orders move through confirmation, reservation, dispatch, transit, delivery, and 
 
 ### The city and its facilities
 
-Each city is generated from a reproducible **seed** on a default **320 × 240 tile map (76,800 tiles)**. Major/local roads, districts and variable-sized lots shape location, routing, land value and market demand. Four zones govern construction:
+Each city is generated from a reproducible **seed** on a default **160 × 120 tile map (19,200 tiles)**. Major/local roads, districts and variable-sized lots shape location, routing, land value and market demand. Four zones govern construction:
 
 | Zone | Map color | Allowed player facilities |
 | --- | --- | --- |
@@ -106,7 +106,7 @@ The live Vercel deployment URL will be linked once an application has been imple
 
 ## Implementation roadmap
 
-The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than reduced-scope releases. Implementation is incremental, but the 320 × 240 city, 60+-SKU/10+-sector catalog, 50 initial AI companies, 40+ trading choices, customer quotations, lifecycle, supply-chain and financial rules are specified from T0.
+The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than reduced-scope releases. Implementation is incremental, but the 160 × 120 city, 60+-SKU/10+-sector catalog, 50 initial AI companies, 40+ trading choices, customer quotations, lifecycle, supply-chain and financial rules are specified from T0.
 
 See [ROADMAP.md](./ROADMAP.md) for milestone dependencies, [TODO.md](./TODO.md) for issue-ready tasks and [SPEC.md](./SPEC.md) for authoritative technical and gameplay requirements.
 
