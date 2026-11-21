@@ -4,7 +4,7 @@
 
 Supply Chain Simulator is a planned browser-based management game in which students direct a company in a procedurally generated city. Inspired by the economic decision-making of *Capitalism Lab*, the project focuses on learning **procurement, sales, inventory, production, logistics, and financial performance** through a simpler, classroom-oriented experience.
 
-> **Project status: Specification / pre-implementation.** The game is not yet playable. The authoritative functional and technical requirements are documented in [SPEC.md](./SPEC.md).
+> **Project status: Specification / pre-implementation.** The game is not yet playable. The authoritative gameplay requirements are documented in [SPEC.md](./SPEC.md), and the software's structural source of truth is [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Educational purpose
 
@@ -108,16 +108,17 @@ The live Vercel deployment URL will be linked once an application has been imple
 
 The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than reduced-scope releases. Implementation is incremental, but the 160 × 120 city, 60+-SKU/10+-sector catalog, 50 initial AI companies, 40+ trading choices, customer quotations, lifecycle, supply-chain and financial rules are specified from T0.
 
-See [ROADMAP.md](./ROADMAP.md) for milestone dependencies, [TODO.md](./TODO.md) for issue-ready tasks and [SPEC.md](./SPEC.md) for authoritative technical and gameplay requirements.
+See [ROADMAP.md](./ROADMAP.md) for milestone dependencies, [TODO.md](./TODO.md) for issue-ready tasks, [SPEC.md](./SPEC.md) for gameplay requirements, and [ARCHITECTURE.md](./ARCHITECTURE.md) for the normative implementation structure.
 
 ## Project documentation
 
 - **[SPEC.md](./SPEC.md)** — Authoritative rules, spatial/market systems, educational goals, architecture and acceptance criteria.
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** — Authoritative module structure, dependency rules, domain ownership, runtime and integration boundaries.
 - **[ROADMAP.md](./ROADMAP.md)** — Complete Release 1.0 milestone sequencing and verification gates.
 - **[TODO.md](./TODO.md)** — Stable task identifiers, implementation requirements and acceptance checklist.
 - **README.md** — Project overview and contributor entry point.
 
-Before implementing or changing simulation behavior, review the relevant sections of `SPEC.md`. Keep business rules testable independently of the user interface, and avoid duplicating authoritative specifications in other documents.
+Before implementing or changing simulation behavior, review the relevant sections of `SPEC.md` and `ARCHITECTURE.md`. `SPEC.md` governs what the game does; `ARCHITECTURE.md` governs how the code is structured. Keep business rules testable independently of the user interface.
 
 ## References
 
