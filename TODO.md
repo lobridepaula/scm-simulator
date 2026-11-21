@@ -19,12 +19,12 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] **M00-T01** Inventory every committed Release 1.0 requirement in `SPEC.md` §§3–16 and map it to milestone, module, acceptance test and observable learning outcome; distinguish mandatory, SHOULD, optional and excluded scope.
 - [ ] **M00-T02** Reconcile `SPEC.md` §17 and `README.md` with the **single complete Release 1.0** strategy; link `ROADMAP.md` and `TODO.md`; avoid “MVP,” “first playable release,” or separate partial releases as delivery promises.
-- [ ] **M00-T03** Record decisions for bounded contexts, authority/state, typed commands/events, the **11-phase scheduler**, company lifecycle/insolvency and liquidation, 320×240 lot/road/chunk data structures, PRNG streams and projected views.
+- [ ] **M00-T03** Record decisions for bounded contexts, authority/state, typed commands/events, the **11-phase scheduler**, company lifecycle/insolvency and liquidation, 160 × 120 lot/road/chunk data structures, PRNG streams and projected views.
 - [ ] **M00-T04** Resolve accounting and logistics ambiguities **before coding**: inventory costing method; asset capitalization and valuation; custody/title during transit; exact recognition/payment boundaries; cash reservation and freight payer; handling pending obligations and insolvency; idempotency keys.
 - [ ] **M00-T05** Define product/scenario/save/report schema versions, migration/rejection rules, broad connected product catalog, funded entrant profiles, 40-counterparty market floor, teacher presets and scenario feasibility validation.
 - [ ] **M00-T06** Establish React + Vite + strict TypeScript project structure matching `SPEC.md` §14, with domain/UI/persistence isolation and path aliases if justified.
 - [ ] **M00-T07** Configure package scripts (`dev`, `build`, `typecheck`, `lint`, `test`, `test:e2e`), formatting conventions, GitHub CI, protected review practices and deterministic test seed fixtures.
-- [ ] **M00-T08** Define UI architecture, 320×240 Canvas viewport/chunk renderer and local asset manifest/provenance contract, supplier/customer company directory, overlays, pt-BR localization, keyboard/focus/screen-reader behavior.
+- [ ] **M00-T08** Define UI architecture, 160 × 120 Canvas viewport/chunk renderer and local asset manifest/provenance contract, supplier/customer company directory, overlays, pt-BR localization, keyboard/focus/screen-reader behavior.
 - [ ] **M00-T09** Define pedagogical objective → game action/event → report evidence → rubric mapping, including a fixed-seed cheese assignment and alternative fruit/furniture scenarios.
 - [ ] **M00-T10** Write architectural dependency checks and milestone acceptance test plan; document nonfunctional target measurements for classroom devices instead of assuming arbitrary performance thresholds.
 
@@ -47,7 +47,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M02 — City, lots, facilities and accessibility
 
-- [ ] **M02-T01** Define and validate generator version/config defaulting to **320 × 240 (76,800 tiles)**, road hierarchy, districts, zones, variable-size lot footprints, starting firms/facilities and reproducible seeds.
+- [ ] **M02-T01** Define and validate generator version/config defaulting to **160 × 120 (19,200 tiles)**, road hierarchy, districts, zones, variable-size lot footprints, starting firms/facilities and reproducible seeds.
 - [ ] **M02-T02** Implement deterministically seeded arterial/collector/local road graph, connected access nodes and cached shortest-path distance/routing; reject unreachable firms/shipments.
 - [ ] **M02-T03** Generate four zones, coherent economic districts, residential demand clusters, non-overlapping contiguous lots of varied footprints and legal access to all active establishments.
 - [ ] **M02-T04** Calculate accessible-demand/footfall indices and nonnegative land prices from documented scenario-configured parameters.
@@ -55,11 +55,12 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M02-T06** Implement store/factory/farm/warehouse base entities with ownership, parent lot, status, capacity, operating cost and allowed operations.
 - [ ] **M02-T07** Provision player starter store and **50 initial AI companies (at least 40 trade-accessible)** across connected product categories, each with legal sites, documented startup equity, road access and viable offer/request profiles; reject nonviable seeds.
 - [ ] **M02-T08** Provide chunkable Canvas 2D viewport projections, spatial lot/facility indices, stable visual asset IDs and company/facility list navigation independently of the map.
-- [ ] **M02-T09** Test multiple 320×240 seeds for 76,800 tiles, all zones, contiguous/non-overlapping lot footprints, valid road access for 40+ firms, atomic placement rejection, deterministic lot values and paths.
+- [ ] **M02-T09** Test multiple 160 × 120 seeds for 19,200 tiles, all zones, contiguous/non-overlapping lot footprints, valid road access for 40+ firms, atomic placement rejection, deterministic lot values and paths.
 
 - [ ] **M02-T10** Benchmark full-map generation, route queries and spatial indices on representative classroom hardware; record baseline memory and time budgets.
+- [ ] **M02-T11** Run multi-seed spatial-capacity tests on the 160×120 default: fit 50 starting AI firms, preserve 40+ independently accessible buyer/supplier counterparts, 4 zones, residential demand and available expansion lots; reject infeasible layouts rather than silently shrinking the market.
 
-**M02 exit:** valid reproducible 320×240 cities, 40+ viable starting AI counterparts, legal ownership/placement and efficient spatial projections.
+**M02 exit:** valid reproducible 160 × 120 cities, 40+ viable starting AI counterparts, legal ownership/placement and efficient spatial projections.
 
 ## M03 — Inventory, commitments and financial integrity
 
@@ -127,7 +128,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 ## M07 — Complete UI and player interaction
 
 - [ ] **M07-T01** Finalize the app shell, navigation, loading/error/empty states, localized status messaging and complete pt-BR labels/glossary hooks.
-- [ ] **M07-T02** Build viewport-culled/chunked Canvas 2D rendering for 320×240 tiles; pan/zoom, road/district/lot/owner/facility visibility, zone/land-value/accessibility/competition overlays, selection and valid construction.
+- [ ] **M07-T02** Build viewport-culled/chunked Canvas 2D rendering for 160 × 120 tiles; pan/zoom, road/district/lot/owner/facility visibility, zone/land-value/accessibility/competition overlays, selection and valid construction.
 - [ ] **M07-T03** Build searchable/list-based facility navigation and ownership/zone/capacity/price/production panels accessible independently of the map.
 - [ ] **M07-T04** Build full Orders experience: choose AI suppliers or named AI customers and their buy requests, quote/submit, mirrored PO/SO, transfer, shipment timeline, cancellation and localized rejections.
 - [ ] **M07-T05** Build Company Dashboard: revenue, simplified profit, ROI formula breakdown, cash, trends, expense/commitment alerts and facility portfolio.
@@ -156,10 +157,10 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] **M09-T01** Automate every invariant in `SPEC.md` §16.1 with sufficient seed/command fixtures, including exactly-once events and financial-vs-inventory reconciliation.
 - [ ] **M09-T02** Automate the full ten-step teacher scenario in `SPEC.md` §16.2 using a fixed cheese seed, plus fruit/furniture and named-AI-customer sales quote → accepted SO/PO regression cases.
-- [ ] **M09-T03** Test 30-day 320×240 campaigns with 50 initial AI firms, 40+ reachable trading counterparts (15 suppliers/15 clients), 60+ products/10+ sectors, customer quote acceptance, founding/closure, shipments and deterministic replay.
+- [ ] **M09-T03** Test 30-day 160 × 120 campaigns with 50 initial AI firms, 40+ reachable trading counterparts (15 suppliers/15 clients), 60+ products/10+ sectors, customer quote acceptance, founding/closure, shipments and deterministic replay.
 - [ ] **M09-T04** Audit keyboard/screen-reader experience, contrast, responsive layouts, locale formatting, help text, product units and no-color-only warnings.
 - [ ] **M09-T05** Audit data privacy, untrusted JSON/CSV handling, safe import limits, runtime error recovery and no requirement for login or secret services.
-- [ ] **M09-T06** Measure full 76,800-tile viewport/chunk rendering, pan/zoom, route lookups, 40+ firm daily advances, startup generation and save/load on school hardware; optimize without changing economic outcomes.
+- [ ] **M09-T06** Measure full 19,200-tile viewport/chunk rendering, pan/zoom, route lookups, 40+ firm daily advances, startup generation and save/load on school hardware; optimize without changing economic outcomes.
 - [ ] **M09-T07** Verify redistributed visual assets and license manifest, configure Vercel static project, preview/prod builds, locally served sprite paths, routing and deployed gameplay.
 - [ ] **M09-T08** Update README setup/build/test/deploy instructions; verify `SPEC.md` ↔ `ROADMAP.md` ↔ `TODO.md` ↔ implemented behavior, and update curriculum caveats.
 - [ ] **M09-T09** Verify no critical/high release blockers; tag/version Release 1.0 and record release notes, known limitations within explicit scope, and test evidence.
@@ -169,7 +170,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 ## 2. Acceptance checklist for the whole release
 
 - [ ] Same seed + same versions + same command history reproduces city, orders, inventory, AI behavior and KPIs.
-- [ ] All zones and facilities are implemented on a 320×240 deterministic map, with legal multi-tile lot acquisition, construction, road connectivity and culling.
+- [ ] All zones and facilities are implemented on a 160 × 120 deterministic map, with legal multi-tile lot acquisition, construction, road connectivity and culling.
 - [ ] At least 60 products in 10+ sectors have legitimate upstream/downstream flows, including three tutorial chains.
 - [ ] A default seeded city starts with 50 AI firms and offers 40+ active trade-capable partners (15 suppliers/15 clients) at every completed-day boundary.
 - [ ] No transaction bypasses PO/SO, shipment, receiving and settlement rules where applicable.
