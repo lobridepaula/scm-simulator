@@ -37,6 +37,20 @@
 
 **User journeys:** J01 procurement→retail, J02 vertical integration/diversification, J03 player-selected AI customer, J04 evolving AI economy, J05 classroom completion. All five are defined in [FEATURES §4](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L257-L302) and must be validated against the [SPEC §16.2 ten-step scenario](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/SPEC.md#L704-L717), not inferred from source snippets. Crosslinks in rows emphasize candidate feature/system owners; a separate genuine E2E implementation has not been observed.
 
+## Journey-level reverse acceptance crosswalk
+
+The five required FEATURES journeys below provide additional *candidate* reverse mappings; this does not turn a completed test into proof of pedagogical outcomes. Source links use the pinned baseline revision.
+
+| FEATURES journey | Relevant features | Planned TODO tasks | Proposed domain ownership | Release acceptance oracle | Current evidence |
+|---|---|---|---|---|---|
+| [J01](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L261) | F04, F05, F06, F08, F10, F12, F15 | M04-T01; M04-T06; M05-T06; M08-T04 | procurement, logistics, inventory, finance | SPEC §16.2 steps 2–7; §16.1 (stock, PO/SO, settlement, save) | Not run / not implemented |
+| [J02](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L271) | F02, F03, F05, F09, F12 | M02-T03; M05-T03; M04-T07 | world, economy, production, finance | SPEC §16.2 step 8; §16.1 (property, production, transfer) | Not run / not implemented |
+| [J03](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L279) | F07, F08, F11, F12 | M04-T08; M06-T02 | procurement, ai, finance, logistics | SPEC §16.2 step 9; §16.1 (quote, one PO/SO) | Not run / not implemented |
+| [J04](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L287) | F02, F04, F11 | M06-T05; M06-T08; M06-T09 | world, economy, ai | SPEC §16.1 (market floor, lifecycle, seeded replay) | Not run / not implemented |
+| [J05](https://github.com/lobridepaula/scm-simulator/blob/0b0046d45b577ba4db3de35c2d220440444db634/FEATURES.md#L295) | F14, F15, F16 | M08-T02; M08-T06; M09-T02 | learning, persistence, engine | SPEC §16.2 steps 1–10; full 30-day classroom report | Not run / not implemented |
+
+Every relationship remains subject to independent semantic and Software Architect ownership review; accepted code/test evidence must be linked at the actual implementation revision.
+
 ## Atomic source-anchored clause index
 
 | Locator | Contract excerpt and pinned line | Classification | Feature(s) | Planned task / existing Issue | Proposed authoritative module(s) | Verification oracle (not executed) | Intended classroom evidence | Implementation evidence |
