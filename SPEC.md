@@ -260,6 +260,8 @@ Inventory invariants:
 
 The engine MUST NOT create two independent financial transactions merely because users see both PO and SO views.
 
+**Selecting AI customers is a first-class gameplay action.** AI buyers MUST publish feasible procurement requests (target product, quantity, acceptable price/terms, destination and validity). A player owning eligible outbound stock may choose a named AI customer, submit a sales quote against the request, and receive its deterministic acceptance/rejection. Acceptance creates exactly one canonical B2B order with the **AI as buyer** and **player as seller**, subject to the normal buyer-funds, destination-capacity, seller-stock, road and settlement rules. The reverse direction (player selects an AI supplier and submits a PO) uses the same order authority. Neither flow grants an AI customer free money or guarantees a sale.
+
 **Supplier selection:** the player MUST search/filter suppliers by firm, SKU, price, stock, road distance, freight and lead time and submit a PO to the selected seller. **Customer selection:** the player MUST inspect explicit AI purchase requirements (product, quantity, target price, expiry), choose the buying firm and submit a seller-side quote. Acceptance MUST create **one canonical buyer PO / seller SO** with the existing stock, cash, capacity, routing and settlement safeguards; rejection MUST NOT move stock, funds or invent revenue.
 
 **B2C retail** uses automatically generated aggregated consumer orders/sales receipts. Household purchases MUST consume store inventory and generate revenue but do not require an establishment-to-establishment PO.
@@ -309,8 +311,8 @@ Alternative terminal paths:
 
 Required behavior:
 
-1. **Draft:** player chooses supplier, destination, product, quantity, and quoted price.
-2. **Submit:** validate destination, supplier’s offer, buyer cash availability, and requested quantity. Submission creates an auditable order number.
+1. **Draft:** player selects either an AI supplier to buy from, or an AI customer's published buy request to quote against; choose the relevant origin/destination, product, quantity and price.
+2. **Submit:** validate the supplier offer or customer request, buyer budget and funds, seller available stock, destination capacity, route and requested quantity. Submission creates an auditable PO/SO-linked identifier only when the corresponding order is accepted.
 3. **Confirm:** supplier accepts only if feasible. Reserve seller stock and destination capacity; reserve/earmark buyer funds for the total purchase value **and inbound freight**, so subsequent orders cannot overcommit cash.
 4. **Dispatch:** release stock from the seller’s on-hand location into shipment custody and mark dispatched/in transit.
 5. **Transport:** shipping time depends on road-network distance and configured logistics speed. Minimum lead time is one simulation day.
@@ -629,6 +631,7 @@ Dependencies SHOULD be lightweight and justified. The simulation MUST NOT depend
 type GameCommand =
   | { type: 'SUBMIT_PURCHASE_ORDER'; buyerFacilityId: string; sellerFacilityId: string; productId: string; quantity: number }
   | { type: 'SUBMIT_SALES_QUOTE'; sellerFacilityId: string; buyerFacilityId: string; productId: string; quantity: number; unitPriceCents: number }
+  | { type: 'SUBMIT_SALES_QUOTE'; customerRequestId: string; sellerFacilityId: string; quantity: number; unitPriceCents: number }
   | { type: 'SET_RETAIL_PRICE'; facilityId: string; productId: string; unitPriceCents: number }
   | { type: 'BUY_LOT'; lotId: string }
   | { type: 'BUILD_FACILITY'; lotId: string; facilityType: 'store' | 'factory' | 'farm' | 'warehouse' }
@@ -676,6 +679,7 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 - [ ] Same seed + scenario configuration + actions yields identical map, order history, and final KPIs.
 - [ ] Every standard fixture generates 320 × 240 (76,800) tiles, all four zones, non-overlapping legal lots and a reachable road graph for all operating facilities.
 - [ ] The player can discover and select at least 40 distinct, viable AI buyers and/or suppliers initially and at each completed day in the standard 30-day scenario.
+- [ ] The player can choose an AI **customer**, submit a feasible sales quote against a published buy request, and fulfill a resulting canonical SO/PO without duplicate settlement.
 - [ ] Entrants, firm growth/retrenchment, insolvency, liquidation and company closure produce stable historical IDs, correct financial/asset events and no disappearing pending orders.
 - [ ] 320 × 240 map renders with viewport-culling, successful hit-tests and usable navigation/accessibility on representative school devices.
 - [ ] Invalid building-zone combinations are rejected without state changes.
