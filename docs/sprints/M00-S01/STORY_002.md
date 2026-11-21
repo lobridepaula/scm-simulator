@@ -1,8 +1,8 @@
 # M00-S01 — STORY_002: Accounting and Financial Decisions
 
-Stage: **story-published**  
-Document revision: **1**  
-Last editor: `scrum-master`  
+Stage: **tasks-populated**  
+Document revision: **2**  
+Last editor: `task-coordinator`  
 Registration: **pending** (review and Task Coordinator handoff)
 
 ## Story Context
@@ -55,4 +55,14 @@ Deploying financial behavior before policy approval, a second settlement engine,
 
 ## Task List
 
-_Pending Task Coordinator decomposition. No task dispatched, accepted or verified._
+| TL-ID | Responsible plugin | Concrete action | Expected deliverable | Independent reviewer | Status | Evidence / blocker |
+|---|---|---|---|---|---|---|
+| TL-001 | Project Manager | Extract fixed versus unresolved rules from SPEC §§6–7, 10, 16 and ARCHITECTURE §§6, 11, 19; distinguish procurement/finance/inventory/logistics authority; do not reopen accepted receipt terms. | Source-linked accounting decision inventory and conflict list for #2, with fixed constraints marked non-negotiable. | Quality Auditor | To do | [#2](https://github.com/lobridepaula/scm-simulator/issues/2); read-only G0 permitted while #1 runs. |
+| TL-002 | Software Architect | Compare FIFO and weighted-average inventory costing, integer-cent rounding, input-to-output production costs, transfers, landed freight and COGS using conservation examples. | Alternatives table with deterministic numerical examples, invariants, rejected-path consequences and test oracles. | Quality Auditor | To do | Depends on TL-001; research only; policy not selected. |
+| TL-003 | Software Architect | Analyze title versus physical custody at dispatch/transit/receipt, cash commitment/release, idempotent settlement, insolvency, pending obligations and liquidation handoffs with #3. | Source-linked state-transition and ownership alternatives with duplicate-receipt, cancellation and insolvency negative cases. | Quality Auditor | To do | Depends on TL-001; coordinate read-only interfaces with STORY_003; no shared-file writes. |
+| TL-004 | Project Manager | Consolidate TL-002/TL-003 options into explicit decision requests and submit policy trade-offs for Product Owner approval only after reviewed #1 G1. | PO decision packet listing each choice, recommendation rationale, invariant impact and explicit approval/unknown status. | Quality Auditor | Blocked | G1 #1 reviewed traceability pending; TL-002 and TL-003 outputs pending; no PO approval. |
+| TL-005 | Software Architect | Prepare source-linked ADR proposals for unresolved accounting and delivery policies in the existing docs/adr convention, marking all unapproved options Proposed. | Reviewable proposed finance ADRs with considered options, consequences, source links, test oracles and pending approver. | Quality Auditor | Blocked | Depends on TL-002–TL-004; ADR file writes require separate approved specialist execution; no accepted policy. |
+| TL-006 | Project Manager | After explicit PO approval, reconcile only affected SPEC, ARCHITECTURE, INTERFACES and DECISIONS references; coordinate a single-writer integration with #3. | Authorized change set or PR with approved decision links and no duplicated financial authority. | Quality Auditor | Blocked | G1 + PO approval + TL-005 + #3 shared-interface agreement and serialized write lock required. |
+| TL-007 | Quality Auditor | Independently check approved accounting decisions, order/ledger/custody invariants, documented test oracles and actual executable results at source SHA; report unavailable CI separately. | Independent accounting verification report with criterion-level evidence, failures and closure recommendation. | Scrum Master | Blocked | Requires TL-006 reviewed changes, available test environment/CI where applicable; no test results yet. |
+
+**Handoff:** Tasks are allocated to verified plugin roles for proposed execution only. Scrum Master owns dispatch and Story acceptance; PO approval and branch-write authorization remain separate. Task Coordinator has not invoked any specialist.
