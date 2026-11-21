@@ -1,8 +1,8 @@
 # M00-S01 — STORY_003: Core Architecture Decision Records
 
-Stage: **story-published**  
-Document revision: **1**  
-Last editor: `scrum-master`  
+Stage: **tasks-populated**  
+Document revision: **2**  
+Last editor: `task-coordinator`  
 Registration: **pending** (review and Task Coordinator handoff)
 
 ## Story Context
@@ -56,4 +56,14 @@ A second source of architectural authority, replacing accepted structure, introd
 
 ## Task List
 
-_Pending Task Coordinator decomposition. No task dispatched, accepted or verified._
+| TL-ID | Responsible plugin | Concrete action | Expected deliverable | Independent reviewer | Status | Evidence / blocker |
+|---|---|---|---|---|---|---|
+| TL-001 | Software Architect | Inventory normative module boundaries, one-writer state ownership, cross-domain atomic commits and fixed SPEC §11 eleven-phase order without redesigning the baseline. | Source-anchored owner/interface and dependency graph analysis for ten simulation domains and engine. | Quality Auditor | To do | [#3](https://github.com/lobridepaula/scm-simulator/issues/3); read-only G0 available; no ADR accepted. |
+| TL-002 | Software Architect | Compare stable ID namespaces, typed command/event envelopes, tie-break rules, canonical serialization/hash and save migration alternatives; map affected interfaces. | Decision alternatives and reproducible replay/invalid-envelope verification oracles, explicitly Proposed. | Quality Auditor | To do | Can research independently of #1 finalization; no runtime claim or new normative API. |
+| TL-003 | Software Architect | Analyze pre-day command queue edit, validation, event atomicity and same-seed replay boundaries while retaining the existing 11-phase scheduler and d+1 delivery floor. | Queue/state-transition options, immutable projection contract and deterministic negative-case test scenarios. | Quality Auditor | To do | Read-only research; no change to SPEC §11 or accepted baseline. |
+| TL-004 | Software Architect | Compare road graph/route index/chunk/caching implementations and define representative 160×120 measurement fixtures; do not choose benchmark-dependent values without measurements. | Options and benchmarking protocol with environment, seed, geometry and determinism constraints. | Quality Auditor | To do | No runnable scaffold or measured performance; choice stays pending. |
+| TL-005 | Software Architect | Consolidate TL-001–TL-004 into source-linked proposed ADRs in the existing docs/adr convention; separate preapproved constraints from PO-dependent options. | Reviewable Proposed ADR set with rejected alternatives, impact, approver status, affected contracts and test oracles. | Quality Auditor | Blocked | Depends on TL-001–TL-004; actual ADR writes require separately authorized specialist work and G1 before finalization. |
+| TL-006 | Software Architect | After #1 G1, PO architecture decisions and #2 financial policy decisions, reconcile custody/liquidation, ownership and interface contracts; serialize ARCHITECTURE/INTERFACES/DECISIONS changes. | Approved, cross-reviewed contracts and one controlled update PR with no competing state authority. | Quality Auditor | Blocked | G1 + G2-fin + G2-arch + TL-005 + shared-file lock; approvals currently absent. |
+| TL-007 | Quality Auditor | Independently review the resulting ADRs and module dependency/test oracles for no cycles, no browser imports into simulation, atomic commands, deterministic replay and shared finance ownership. | SHA-linked architecture fitness/ADR verification report with explicit not-run versus pass and gate recommendation. | Scrum Master | Blocked | Depends on TL-005/TL-006 and actual reviewable implementation/tests where available; no CI evidence. |
+
+**Handoff:** Tasks are allocated to verified plugin roles for proposed execution only. Scrum Master owns dispatch and Story acceptance; PO approval and branch-write authorization remain separate. Task Coordinator has not invoked any specialist.
