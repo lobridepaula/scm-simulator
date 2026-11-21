@@ -1,9 +1,9 @@
 # M00-S01 — STORY_002: Accounting and Financial Decisions
 
 Stage: **tasks-populated**  
-Document revision: **2**  
-Last editor: `task-coordinator`  
-Registration: **pending** (review and Task Coordinator handoff)
+Document revision: **3**  
+Last editor: `scrum-master`  
+Registration: **confirmed** (GitHub planning branch `planning/m00-s01-story-context`; draft PR #86; not merged into `main`)
 
 ## Story Context
 
