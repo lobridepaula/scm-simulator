@@ -42,7 +42,7 @@ Orders move through confirmation, reservation, dispatch, transit, delivery, and 
 
 ### The city and its facilities
 
-Each city is generated from a reproducible **seed**. Land value and commercial potential reflect simplified location accessibility and activity. Four zones govern construction:
+Each city is generated from a reproducible **seed** on a default **320 × 240 tile map (76,800 tiles)**. Major/local roads, districts and variable-sized lots shape location, routing, land value and market demand. Four zones govern construction:
 
 | Zone | Map color | Allowed player facilities |
 | --- | --- | --- |
@@ -58,11 +58,13 @@ Facilities have distinct economic roles:
 - **Farms** harvest or extract primary resources.
 - **Warehouses** store and dispatch products without manufacturing them.
 
-Starter product chains include **fruit** (farm → store), **cheese** (dairy farm → factory → store), and **furniture** (resource producer → factory → store).
+Starter product chains include **fruit** (farm → store), **cheese** (dairy farm → factory → store), and **furniture** (resource producer → factory → store). They are teaching examples within a wider connected catalog of agricultural goods, industrial inputs and finished products.
 
 ### Competition and performance
 
-The initial classroom scenario is designed for **one player company and three AI companies**. Competitors use deterministic business rules, not paid generative-AI services.
+The standard city supports **one player company and at least 40 trade-accessible AI companies** across a broad network of products, industries, suppliers, buyers and competing retailers. The player can choose individual counterparties for feasible B2B orders. AI firms follow reproducible business rules, not paid generative-AI services.
+
+The business population is dynamic: companies can be founded, purchase property, open new units, lose competitiveness, become insolvent, liquidate assets and close. The standard scenario preserves a minimum of 40 accessible counterparties after each simulated day through a funded, validated entry pipeline. Closure preserves historical orders and property ownership records.
 
 The headline business indicators are:
 
@@ -86,9 +88,9 @@ The game interface is intended to use **Brazilian Portuguese (`pt-BR`)**, with t
 | --- | --- |
 | Language | TypeScript (strict mode) |
 | Web interface | React + Vite |
-| City rendering | Lightweight SVG or Canvas 2D |
+| City rendering | Chunked, viewport-culled Canvas 2D with local, licensed visual assets |
 | Simulation | Framework-independent, deterministic TypeScript engine |
-| Competitors | Rule-based autonomous company agents |
+| Competitors | 40+ rule-based AI trading counterparts with deterministic company entry, expansion and exit |
 | Testing | Vitest; optional Playwright end-to-end tests |
 | Local saves | IndexedDB and JSON import/export |
 | Hosting | GitHub repository + static deployment on Vercel |
@@ -104,18 +106,16 @@ The live Vercel deployment URL will be linked once an application has been imple
 
 ## Implementation roadmap
 
-The project is divided into three planned milestones:
+The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than separate reduced-scope releases. Implementation is incremental, but the 320 × 240 city, scalable market, 40+ viable AI company relationships, lifecycle rules, supply chains, financial integrity and complete educational experience are part of the product contract from T0.
 
-1. **Milestone A — First purchase order:** deterministic world and company models, inventory, supplier offers, ordering, delivery, and a minimal playable interface.
-2. **Milestone B — Classroom economy:** all zones and facilities, three product chains, production, consumer demand, AI competition, land acquisition, and financial indicators.
-3. **Milestone C — Teaching and publication:** tutorials, glossary, teacher scenarios, local saves, result exports, accessibility, automated checks, and Vercel deployment.
-
-These milestones describe **planned work**, not completed features. Detailed acceptance criteria and rules are maintained in [SPEC.md](./SPEC.md).
+See [ROADMAP.md](./ROADMAP.md) for milestone dependencies, [TODO.md](./TODO.md) for issue-ready tasks and [SPEC.md](./SPEC.md) for authoritative technical and gameplay requirements.
 
 ## Project documentation
 
-- **[SPEC.md](./SPEC.md)** — Source of truth for game rules, educational goals, data models, architecture, implementation stages, and verification criteria.
-- **README.md** — Project overview and entry point for visitors and contributors.
+- **[SPEC.md](./SPEC.md)** — Authoritative rules, spatial/market systems, educational goals, architecture and acceptance criteria.
+- **[ROADMAP.md](./ROADMAP.md)** — Complete Release 1.0 milestone sequencing and verification gates.
+- **[TODO.md](./TODO.md)** — Stable task identifiers, implementation requirements and acceptance checklist.
+- **README.md** — Project overview and contributor entry point.
 
 Before implementing or changing simulation behavior, review the relevant sections of `SPEC.md`. Keep business rules testable independently of the user interface, and avoid duplicating authoritative specifications in other documents.
 
