@@ -39,3 +39,14 @@ For each actual decision record capture: stable ADR ID; title; status (Proposed/
 Propose → assess requirements and invariant impacts → obtain Product Owner approval where gameplay or major structure changes → update authoritative documents → implement and verify → record decision history. Never mark a listed open question as Accepted merely because documentation was generated.
 
 See [FEATURES.md](../../FEATURES.md) and [ROADMAP.md](../../ROADMAP.md) for acceptance and scheduling.
+
+## Proposed ADR package for M00-S01 STORY_003 (not accepted)
+
+The following **proposal-only** records elaborate the existing backlog; they do not alter `SPEC.md`, `ARCHITECTURE.md`, `INTERFACES.md`, or the status of Issue #3:
+
+- [ADR-M00-001 — Command/event identity, ordering and replay](../adr/ADR-M00-001-command-event-identity-and-replay.md): alternative ID namespaces, envelope ordering, canonical hash and migrations; **Proposed**.
+- [ADR-M00-002 — Pre-day queue and atomic transactions](../adr/ADR-M00-002-pre-day-queue-and-transactions.md): editable queue and phase-1 validation alternatives; **Proposed**.
+- [ADR-M00-003 — Spatial index, routing and renderer chunks](../adr/ADR-M00-003-spatial-index-routing-and-rendering.md): measurement-dependent alternatives; **Proposed**, no benchmark results.
+- [ADR-M00-004 — Finance/custody/liquidation interfaces](../adr/ADR-M00-004-finance-custody-and-liquidation-interfaces.md): cross-review with Issue #2 and Product Owner; **Proposed**.
+
+**Dependency order:** independent ADR option/owner review → Product Owner decisions (G2-arch and G2-fin) → serialized edits to shared normative contracts → automated architecture/engine tests and independent QA → Story/Issue acceptance. The documentation-only G1 traceability baseline was integrated via PRs #86/#87, but STORY_001 still records partial gate acceptance; this is not treated as permission to finalize blocked decisions.
