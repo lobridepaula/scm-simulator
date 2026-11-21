@@ -34,7 +34,7 @@ Release 1.0 supports: (a) reproducible **160 × 120 tile (19,200 tile)** city wi
 
 ## 3. Architectural baseline and workstreams
 
-Use `SPEC.md` §14 as the architecture baseline: React + Vite UI, independent TypeScript simulation engine, viewport-culled Canvas 2D city with local verified sprite assets, schema-validated JSON scenario data, IndexedDB/local JSON persistence, Vitest, browser E2E tests, and GitHub-based static deployment on Vercel. Keep internal names and technical documentation in English; player-facing content in pt-BR.
+Use [`ARCHITECTURE.md`](./ARCHITECTURE.md) as the normative structural implementation contract, consistent with `SPEC.md` §14: React + Vite UI, independent TypeScript simulation engine, viewport-culled Canvas 2D city with local verified sprite assets, schema-validated JSON scenario data, IndexedDB/local JSON persistence, Vitest, browser E2E tests, and GitHub-based static deployment on Vercel. Keep internal names and technical documentation in English; player-facing content in pt-BR.
 
 Workstreams run throughout the roadmap, even when a milestone is primarily focused elsewhere:
 
@@ -173,7 +173,7 @@ Track each checklist item in `TODO.md` as an independent GitHub issue when it re
 
 The committed Release 1.0 scope in `SPEC.md` includes the 160 × 120 world, multi-sector product catalog, minimum 40 AI counterparties, deterministic company lifecycle and asset management. Keep the issue backlog in `TODO.md` aligned to these requirements. `README.md` summarizes rather than redefining them.
 
-1. Record architecture decisions for lot footprints, road/chunk data structures, lifecycle and order/asset liquidation semantics before implementation.
+1. Follow `ARCHITECTURE.md` for module ownership and dependency rules; record outstanding decisions for lot footprints, road/chunk data structures, lifecycle and order/asset liquidation semantics before dependent implementation.
 2. Treat AI founding and closure as committed work, **not optional expansion**.
 3. Keep financial formulas, economic invariants, precise geography and lifecycle rules normative only in `SPEC.md`.
 4. Maintain licensed asset provenance and test seed/performance baselines as implementation evolves.
