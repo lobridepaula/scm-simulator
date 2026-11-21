@@ -58,11 +58,11 @@ Facilities have distinct economic roles:
 - **Farms** harvest or extract primary resources.
 - **Warehouses** store and dispatch products without manufacturing them.
 
-Starter product chains include **fruit** (farm → store), **cheese** (dairy farm → factory → store), and **furniture** (resource producer → factory → store). They are teaching examples within a wider connected catalog of agricultural goods, industrial inputs and finished products.
+Starter product chains include **fruit**, **cheese** and **furniture** as teaching examples. The complete game specifies **at least 60 tradable products across 10+ sectors**, with feasible raw-material sources, intermediate production and final customers.
 
 ### Competition and performance
 
-The standard city supports **one player company and at least 40 trade-accessible AI companies** across a broad network of products, industries, suppliers, buyers and competing retailers. The player can choose individual counterparties for feasible B2B orders. AI firms follow reproducible business rules, not paid generative-AI services.
+The standard city starts with **one player company and 50 AI companies**, with **at least 40 simultaneously trade-accessible AI partners** (including at least 15 supplier options and 15 potential B2B customers). The player can compare and select suppliers, choose AI customers from published purchasing requirements, submit seller-side quotes and fulfill accepted B2B orders. These are available choices, **not 40 required transactions**. AI strategies use deterministic rules without paid generative-AI services.
 
 The business population is dynamic: companies can be founded, purchase property, open new units, lose competitiveness, become insolvent, liquidate assets and close. The standard scenario preserves a minimum of 40 accessible counterparties after each simulated day through a funded, validated entry pipeline. Closure preserves historical orders and property ownership records.
 
@@ -106,7 +106,7 @@ The live Vercel deployment URL will be linked once an application has been imple
 
 ## Implementation roadmap
 
-The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than separate reduced-scope releases. Implementation is incremental, but the 320 × 240 city, scalable market, 40+ viable AI company relationships, lifecycle rules, supply chains, financial integrity and complete educational experience are part of the product contract from T0.
+The project targets **one complete Release 1.0**, with milestone gates **M00–M09** rather than reduced-scope releases. Implementation is incremental, but the 320 × 240 city, 60+-SKU/10+-sector catalog, 50 initial AI companies, 40+ trading choices, customer quotations, lifecycle, supply-chain and financial rules are specified from T0.
 
 See [ROADMAP.md](./ROADMAP.md) for milestone dependencies, [TODO.md](./TODO.md) for issue-ready tasks and [SPEC.md](./SPEC.md) for authoritative technical and gameplay requirements.
 
