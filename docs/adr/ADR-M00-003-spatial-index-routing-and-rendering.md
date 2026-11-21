@@ -16,3 +16,13 @@ Build fixtures for at least: dense 160×120 road grid; sparse disconnected roads
 
 ## Consequence and decision gate
 Packed grids may be compact for a fixed city but have less adaptable graph mutation; sparse edges can express road semantics more flexibly at allocation cost. Cached routing trades memory and invalidation complexity for potential repeated-query speed; chunk strategies trade update work against draw culling. **No option is chosen without measurements and review**; the 160×120 requirement remains fixed.
+
+## Decision record and authority
+
+- **Decision date:** Pending; this proposal has no approval date.
+- **Selected alternative:** None — Product Owner decision pending.
+- **Rejected alternatives:** None of the viable A/B/C alternatives rejected; only constraints explicitly prohibited by SPEC/ARCHITECTURE are invalid. Rejection rationale is pending the decision.
+- **Supersedes:** None.
+- **Decision log:** Proposed for M00-S01 STORY_003 / Issue #3; no accepted or superseded revision. Future approval must name the chosen option, approver, date, rationale, rejected alternatives and impacts.
+- **Affected authorities:** `SPEC.md` §4; `ARCHITECTURE.md` §§6,9,16,19; `docs/architecture/INTERFACES.md`; `docs/architecture/DECISIONS.md`. Measurement-dependent implementation remains open. The existing normative documents remain unchanged pending approved reconciliation.
+- **Verification status:** **NOT RUN** — proposed oracles are specifications, not test definitions executed in CI; no application scaffold or runnable architecture check is present on the inspected baseline. Regression evidence, integration SHA and any later performance measurements must be recorded separately.
