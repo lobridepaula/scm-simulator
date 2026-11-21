@@ -23,3 +23,13 @@
 
 ## Trade-offs and gate
 Editable queues have higher UI flexibility and more identity/versioning complexity; immutable revisions are simpler to replay but require clearer UX. Optimistic previews improve feedback but can mislead unless marked non-authoritative. PO must approve actual editing and validation semantics; Software Architect can implement neither option as settled policy until approved. Dependent typed contracts may be sketched in documentation, not declared final.
+
+## Decision record and authority
+
+- **Decision date:** Pending; this proposal has no approval date.
+- **Selected alternative:** None — Product Owner decision pending.
+- **Rejected alternatives:** None of the viable A/B/C alternatives rejected; only constraints explicitly prohibited by SPEC/ARCHITECTURE are invalid. Rejection rationale is pending the decision.
+- **Supersedes:** None.
+- **Decision log:** Proposed for M00-S01 STORY_003 / Issue #3; no accepted or superseded revision. Future approval must name the chosen option, approver, date, rationale, rejected alternatives and impacts.
+- **Affected authorities:** `SPEC.md` §§7,11,16; `ARCHITECTURE.md` §§7–8,11,19; `docs/architecture/INTERFACES.md`; `docs/architecture/DECISIONS.md`. Queue UX and rejection-code contracts remain unapproved. The existing normative documents remain unchanged pending approved reconciliation.
+- **Verification status:** **NOT RUN** — proposed oracles are specifications, not test definitions executed in CI; no application scaffold or runnable architecture check is present on the inspected baseline. Regression evidence, integration SHA and any later performance measurements must be recorded separately.
