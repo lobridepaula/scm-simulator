@@ -109,7 +109,7 @@ flowchart TB
 
 ## 5. Canonical repository structure
 
-This is the **target directory contract**, not a list of currently existing files. It refines the suggested layout in `SPEC.md` `14.2 without changing the required domains. Names may be refined only through a documented architecture change.
+This is the **target directory contract**, not a list of currently existing files. It refines the suggested layout in `SPEC.md` §14.2 without changing the required domains. Names may be refined only through a documented architecture change.
 
 ```text
 /
@@ -238,7 +238,7 @@ This is a **shape illustration**, not a frozen API signature.
 
 - A command expresses an intent to change state, has a stable ID, issuer identity, scenario day, deterministic sequence position, typed payload, and validation result.
 - The player and AI use the **same command processor** and permission/ownership/resource rules. The issuer changes authorization context, not economic privileges.
-- The UI may queue a player intent between days and render a pending state. The scheduler freezes the next-day command batch as required by `SPEC.md` `11.
+- The UI may queue a player intent between days and render a pending state. The scheduler freezes the next-day command batch as required by `SPEC.md` §11.
 - Commands that fail domain validation MUST not modify canonical state, consume economic resources, or partially emit committed domain events. Rejections carry machine-readable reason codes for `pt-BR` presentation.
 - Commands affecting multiple modules MUST execute as an atomic transaction. Validate prerequisites, calculate all effects, then commit the new state and its event batch together; otherwise reject with unchanged state.
 - Duplicate command IDs, dispatches, receipts, settlements, and ledger posting keys MUST be detected as part of idempotency rules.
@@ -260,7 +260,7 @@ Formatting into Portuguese and Brazilian monetary presentation happens in the lo
 
 ## 8. Deterministic daily runtime
 
-The daily scheduler is the **only authority for simulated time**. The order below MUST match `SPEC.md` `11:
+The daily scheduler is the **only authority for simulated time**. The order below MUST match `SPEC.md` §11:
 
 1. Freeze the player-command batch for the next day and validate it.
 2. Let AI companies create decisions in stable company-ID order.
@@ -314,7 +314,7 @@ The default world MUST be **160 × 120 tiles**, with all four zoning categories 
 - **Establishment:** economic entity belonging to a company and occupying one eligible lot.
 - **Road graph:** connected, typed road edges and access nodes used by canonical logistics routing.
 
-Zone compatibility is authoritative in `SPEC.md` `4.2: industrial → factory/warehouse; agricultural → farm/warehouse; commercial → store/warehouse; residential → no construction. One lot initially supports at most one operating establishment. Lot acquisition and construction are separate validated transactions.
+Zone compatibility is authoritative in `SPEC.md` §4.2: industrial → factory/warehouse; agricultural → farm/warehouse; commercial → store/warehouse; residential → no construction. One lot initially supports at most one operating establishment. Lot acquisition and construction are separate validated transactions.
 
 ### 9.2 Rendering
 
@@ -374,7 +374,7 @@ flowchart TD
     Receipt --> Settle["Exactly-once cash, freight, revenue, COGS"]
 ```
 
-Order status and legal transitions MUST follow `SPEC.md` `7: `draft → submitted → confirmed → dispatched → in_transit → delivered`, with rejection or pre-dispatch cancellation where permitted.
+Order status and legal transitions MUST follow `SPEC.md` §7: `draft → submitted → confirmed → dispatched → in_transit → delivered`, with rejection or pre-dispatch cancellation where permitted.
 
 ### 11.2 Resource commitment boundaries
 
@@ -409,7 +409,7 @@ Residential demand is aggregated by district, product, and day. The market engin
 
 The learning module is **an observer of canonical gameplay**, not a second economic engine. It evaluates milestones and rubric evidence from orders, decisions, event timelines, and KPIs; it cannot change simulation funds, stock, firms, or routing. Teacher presets supply versioned seed/configuration, learning objectives, allowed actions, and assessment settings. Reports include the scenario identity, reproducible outcomes, decision evidence, and optional learner reflections.
 
-BNCC references are pedagogical mappings described in `SPEC.md` `13, not claims of formal educational accreditation.
+BNCC references are pedagogical mappings described in `SPEC.md` §13, not claims of formal educational accreditation.
 
 ## 13. Content contracts and validation
 
@@ -503,7 +503,7 @@ Additional **architecture fitness assertions**:
 9. A saved game must resume with the same ensuing state/events as uninterrupted play.
 10. End-to-end metrics must reconcile to authoritative transactions, not UI-maintained counters.
 
-`Vitest` covers unit/integration/scenario tests. `Playwright` is the preferred browser E2E adapter if adopted; equivalent browser tests are acceptable only if they verify the same contracts. The Release 1.0 gate is `SPEC.md` `16 and `ROADMAP.md` M09, not a reduced smoke-test substitute.
+`Vitest` covers unit/integration/scenario tests. `Playwright` is the preferred browser E2E adapter if adopted; equivalent browser tests are acceptable only if they verify the same contracts. The Release 1.0 gate is `SPEC.md` §16 and `ROADMAP.md` M09, not a reduced smoke-test substitute.
 
 ## 18. Security, accessibility, and operational boundaries
 
@@ -523,7 +523,7 @@ The **structural seams** above are authoritative now. The following domain-speci
 3. **Liquidation resolution:** define deterministic treatment of open orders, reserved funds, in-transit goods, lot/building assets, unpaid obligations, and terminal closure criteria.
 4. **ID and serialization format:** establish stable ID namespaces, exact command/event envelope schema, canonical serialization/hashing, and save-version migration policy.
 5. **Road graph/chunk representation:** benchmark and select concrete arrays, graph indices, chunk dimensions, and routing cache strategy; do not alter the 160 × 120 default or spatial validity rules.
-6. **Day-queue interaction details:** specify permitted pre-day command edits and how queued UI actions are displayed, while retaining `SPEC.md` `11 phase order and validation/commit rules.
+6. **Day-queue interaction details:** specify permitted pre-day command edits and how queued UI actions are displayed, while retaining `SPEC.md` §11 phase order and validation/commit rules.
 
 Record decisions as ADRs and update this file with accepted contracts. No dependent feature is considered finished while its essential policy remains unspecified.
 
