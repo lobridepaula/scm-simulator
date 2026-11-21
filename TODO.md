@@ -53,7 +53,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M02-T04** Calculate accessible-demand/footfall indices and nonnegative land prices from documented scenario-configured parameters.
 - [ ] **M02-T05** Define immutable lot IDs, footprints, owner/asset records, zoning/access/collision constraints, purchase and redevelopment eligibility, one operating facility per lot, and recorded transfer on firm closure.
 - [ ] **M02-T06** Implement store/factory/farm/warehouse base entities with ownership, parent lot, status, capacity, operating cost and allowed operations.
-- [ ] **M02-T07** Provision player starter store and **40+ distinct trade-accessible AI companies** across connected product categories, each with legal sites, documented startup equity, road access and viable offer/request profiles; reject nonviable seeds.
+- [ ] **M02-T07** Provision player starter store and **50 initial AI companies (at least 40 trade-accessible)** across connected product categories, each with legal sites, documented startup equity, road access and viable offer/request profiles; reject nonviable seeds.
 - [ ] **M02-T08** Provide chunkable Canvas 2D viewport projections, spatial lot/facility indices, stable visual asset IDs and company/facility list navigation independently of the map.
 - [ ] **M02-T09** Test multiple 320×240 seeds for 76,800 tiles, all zones, contiguous/non-overlapping lot footprints, valid road access for 40+ firms, atomic placement rejection, deterministic lot values and paths.
 
@@ -63,7 +63,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M03 — Inventory, commitments and financial integrity
 
-- [ ] **M03-T01** Define integer-unit products, standardized packaging, product eligibility and initial catalogs for fruit, milk, cheese, wood and furniture, with all recipe/source prerequisites.
+- [ ] **M03-T01** Define 60+ distinct tradable products in 10+ sectors, standard units, product eligibility, source-to-recipe-to-buyer paths, including fruit, milk, cheese, wood and furniture.
 - [ ] **M03-T02** Implement facility/product stock balances: `onHand`, `reservedOutbound`, `reservedInboundCapacity`, stock value/cost basis and in-transit custody linkage.
 - [ ] **M03-T03** Implement atomic stock/capacity reservation, commitment release and available-to-promise calculations; prevent double reservation.
 - [ ] **M03-T04** Implement cash/equity balances, earmarked purchase-plus-freight commitments and available-to-spend validation across every payment-capable command.
@@ -94,7 +94,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M05 — Production, extraction, household demand and retail
 
-- [ ] **M05-T01** Implement broad multi-category connected product/recipe catalog, permitted sources/buyers, facility permissions, input/output quantities, daily limits and costs, while preserving guided fruit/cheese/furniture chains.
+- [ ] **M05-T01** Implement 60+ SKU/10+ sector connected product/recipe catalog with permitted sources/buyers, processing inputs/outputs, limits/costs and tutorial fruit/cheese/furniture chains.
 - [ ] **M05-T02** Implement farm production/resource extraction with output capacity, cash/operating cost and legitimate inventory valuation.
 - [ ] **M05-T03** Implement factory production with exact input consumption, processing cost capitalization, no negative stock, and outputs eligible only after the proper scheduler boundary.
 - [ ] **M05-T04** Implement warehouse storage, dispatch and transfer flows using the same inventory/capacity rules; no manufacturing or household sales there.
@@ -108,9 +108,9 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M06 — Autonomous competitors and competitive markets
 
-- [ ] **M06-T01** Implement **40+ independent initial AI counterparties** and configurable deterministic sector-aware strategies (stock, price, supplier/customer choice, reliability, expansion, closure and risk tolerance).
+- [ ] **M06-T01** Generate **50 initial AI firms with 40+ independently reachable trade-capable partners (15 supplier and 15 customer options)** and configurable deterministic sector-aware strategies (stock, price, supplier/customer choice, reliability, expansion, closure and risk tolerance).
 - [ ] **M06-T02** Ensure AI submits the **same typed commands** as the player and passes identical funds/stock/capacity/ownership rules.
-- [ ] **M06-T03** Implement AI offer publication, order confirmation/rejection, replenishment and purchasing from either AI or player suppliers.
+- [ ] **M06-T03** Implement AI sell offers, B2B customer buy requirements, seller-side quote acceptance/rejection, replenishment and buying from AI or player suppliers.
 - [ ] **M06-T04** Implement production planning, stock-aware retail pricing, household market competition and response to shortages.
 - [ ] **M06-T05** Implement stable company-ID decision/tie-break order, cadence-based bounded AI and market ecology evaluation, indexed offers/districts, dedicated entry PRNG stream and no future event knowledge.
 - [ ] **M06-T06** Verify complementary and competing supply networks, including competitor-as-customer, competitor-as-supplier and AI-to-AI purchase chains.
@@ -156,7 +156,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] **M09-T01** Automate every invariant in `SPEC.md` §16.1 with sufficient seed/command fixtures, including exactly-once events and financial-vs-inventory reconciliation.
 - [ ] **M09-T02** Automate the full ten-step teacher scenario in `SPEC.md` §16.2 using a fixed cheese seed, plus fruit/furniture and named-AI-customer sales quote → accepted SO/PO regression cases.
-- [ ] **M09-T03** Exercise 30-day campaigns on 320×240 cities with 40+ AI firms, entrant and closure events, insolvency, pending shipments, invalid inputs and deterministic replay; assert no duplicate IDs or invalid state.
+- [ ] **M09-T03** Test 30-day 320×240 campaigns with 50 initial AI firms, 40+ reachable trading counterparts (15 suppliers/15 clients), 60+ products/10+ sectors, customer quote acceptance, founding/closure, shipments and deterministic replay.
 - [ ] **M09-T04** Audit keyboard/screen-reader experience, contrast, responsive layouts, locale formatting, help text, product units and no-color-only warnings.
 - [ ] **M09-T05** Audit data privacy, untrusted JSON/CSV handling, safe import limits, runtime error recovery and no requirement for login or secret services.
 - [ ] **M09-T06** Measure full 76,800-tile viewport/chunk rendering, pan/zoom, route lookups, 40+ firm daily advances, startup generation and save/load on school hardware; optimize without changing economic outcomes.
@@ -170,11 +170,12 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] Same seed + same versions + same command history reproduces city, orders, inventory, AI behavior and KPIs.
 - [ ] All zones and facilities are implemented on a 320×240 deterministic map, with legal multi-tile lot acquisition, construction, road connectivity and culling.
-- [ ] All three product chains produce legitimate goods and retail/wholesale transactions.
+- [ ] At least 60 products in 10+ sectors have legitimate upstream/downstream flows, including three tutorial chains.
+- [ ] A default seeded city starts with 50 AI firms and offers 40+ active trade-capable partners (15 suppliers/15 clients) at every completed-day boundary.
 - [ ] No transaction bypasses PO/SO, shipment, receiving and settlement rules where applicable.
 - [ ] Internal transfers never create external revenue or duplicate goods.
 - [ ] Cash, commitments, assets, inventory and ledger are consistent; simplified net profit and ROI are traceable.
-- [ ] At least 40 AI counterparties are supplier/customer selectable at each standard completed-day boundary; their entry/exit/expansion/liquidation, orders, ownership and ledgers remain valid.
+- [ ] At least 40 AI counterparties (15 supplier/15 customer options) are supplier/customer selectable at each standard completed-day boundary; their entry/exit/expansion/liquidation, orders, ownership and ledgers remain valid.
 - [ ] Player can complete the 30-day task through accessible pt-BR interface.
 - [ ] Teacher can assign a fixed scenario and evaluate gameplay decisions through a local export.
 - [ ] Save/load and import/export preserve pending orders, financial data, PRNG state and replay behavior.
