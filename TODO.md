@@ -37,7 +37,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M01-T03** Implement normalized authoritative `SimulationState` and read-only domain projections; define ownership of lots, facilities, stock, commitments, orders, shipments, AI policies and ledger.
 - [ ] **M01-T04** Define and validate typed player/AI `GameCommand` and domain `GameEvent` contracts, including rejection reason codes and stable event ordering.
 - [ ] **M01-T05** Implement command dispatcher as an atomic validation/apply boundary; failed commands must not mutate state or emit settlement events.
-- [ ] **M01-T06** Implement daily scheduler with the exact ten phases in `SPEC.md` §11 and documented conflict tie-breakers; ensure production outputs cannot join earlier same-day dispatch.
+- [ ] **M01-T06** Implement daily scheduler with the exact **eleven phases** in `SPEC.md` §11, including post-financial market ecology and documented tie-breakers; ensure production outputs cannot join earlier same-day dispatch.
 - [ ] **M01-T07** Build event timeline, deterministic state snapshot/checksum and replay harness using seed + versions + ordered commands.
 - [ ] **M01-T08** Create UI-to-engine command adapter and state projection selector layer; no direct simulation mutation in React components.
 - [ ] **M01-T09** Establish versioned save envelope and serialization boundary now, including pending actions and PRNG state, even though full browser persistence UI arrives later.
@@ -77,8 +77,8 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M04 — Procurement, B2B sales, shipments and internal transfers
 
-- [ ] **M04-T01** Implement supplier offer publication, purchasability checks, comparative landed-cost/freight/lead-time quotes and offer validity.
-- [ ] **M04-T02** Define the single canonical B2B commercial order with mirrored buyer PO and seller SO projections, auditable identifiers and authoritative status history.
+- [ ] **M04-T01** Implement supplier offers and AI customer purchase requests, validity/budget checks, product matching and landed-cost/freight/lead-time comparisons.
+- [ ] **M04-T02** Define one canonical B2B commercial order for either player purchases from AI suppliers or player sales to selected AI customers, with mirrored buyer PO/seller SO projections, auditable IDs and history.
 - [ ] **M04-T03** Implement `draft`, `submitted`, `confirmed`, `rejected`, `cancelled`, `dispatched`, `in_transit`, `delivered` state transitions with legal guards.
 - [ ] **M04-T04** Validate buyer/seller/facility/product ownership, quantities, available stock, available uncommitted cash, destination capacity and connected route before confirmation.
 - [ ] **M04-T05** Reserve seller outbound stock, destination inbound capacity and buyer total purchase-plus-freight funds once per confirmed order.
@@ -88,7 +88,9 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M04-T09** Implement intra-company transfer orders with physical movement, cost carry-over and no consolidated company revenue/COGS.
 - [ ] **M04-T10** Build integration tests for contention over stock, cash and capacity; unreachable paths; duplicate receipts; cancellation; order replay; and player ↔ AI / AI ↔ AI symmetry.
 
-**M04 exit:** every supported trade/transfer follows auditable, value-preserving physical and financial events.
+- [ ] **M04-T11** Allow player to select an AI customer's procurement request, submit a sales quote, have AI validate/accept or reject, and fulfill accepted orders with the AI paying as buyer; test both trade directions without duplicate payments.
+
+**M04 exit:** every player purchase, player sale to a named AI buyer, and internal trade/transfer follows auditable physical/financial events.
 
 ## M05 — Production, extraction, household demand and retail
 
@@ -127,7 +129,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M07-T01** Finalize the app shell, navigation, loading/error/empty states, localized status messaging and complete pt-BR labels/glossary hooks.
 - [ ] **M07-T02** Build viewport-culled/chunked Canvas 2D rendering for 320×240 tiles; pan/zoom, road/district/lot/owner/facility visibility, zone/land-value/accessibility/competition overlays, selection and valid construction.
 - [ ] **M07-T03** Build searchable/list-based facility navigation and ownership/zone/capacity/price/production panels accessible independently of the map.
-- [ ] **M07-T04** Build complete Orders experience: supplier comparison, draft/submit, PO/SO mirrored views, transfers, shipment timeline, cancellation and localized rejection explanations.
+- [ ] **M07-T04** Build full Orders experience: choose AI suppliers or named AI customers and their buy requests, quote/submit, mirrored PO/SO, transfer, shipment timeline, cancellation and localized rejections.
 - [ ] **M07-T05** Build Company Dashboard: revenue, simplified profit, ROI formula breakdown, cash, trends, expense/commitment alerts and facility portfolio.
 - [ ] **M07-T06** Build searchable directory for 40+ AI buyers/suppliers, firm status/history and competitive offers; compare landed cost and ETA alongside inventory, committed stock, recipes, replenishment and price actions.
 - [ ] **M07-T07** Integrate pause/advance day, optional multi-day confirmation, event/day summary and actionable insolvency or stockout explanations.
@@ -153,7 +155,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 ## M09 — Release-wide validation and publication
 
 - [ ] **M09-T01** Automate every invariant in `SPEC.md` §16.1 with sufficient seed/command fixtures, including exactly-once events and financial-vs-inventory reconciliation.
-- [ ] **M09-T02** Automate the full ten-step teacher scenario in `SPEC.md` §16.2 using a fixed cheese seed, plus regression scenarios for fruit and furniture.
+- [ ] **M09-T02** Automate the full ten-step teacher scenario in `SPEC.md` §16.2 using a fixed cheese seed, plus fruit/furniture and named-AI-customer sales quote → accepted SO/PO regression cases.
 - [ ] **M09-T03** Exercise 30-day campaigns on 320×240 cities with 40+ AI firms, entrant and closure events, insolvency, pending shipments, invalid inputs and deterministic replay; assert no duplicate IDs or invalid state.
 - [ ] **M09-T04** Audit keyboard/screen-reader experience, contrast, responsive layouts, locale formatting, help text, product units and no-color-only warnings.
 - [ ] **M09-T05** Audit data privacy, untrusted JSON/CSV handling, safe import limits, runtime error recovery and no requirement for login or secret services.
