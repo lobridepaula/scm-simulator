@@ -12,7 +12,7 @@ Registration: **pending** (review and Task Coordinator handoff)
 - **Target integration branch / inspected baseline:** `main` / `0b0046d45b577ba4db3de35c2d220440444db634`
 - **Product Owner:** repository owner (business and substantive architecture decisions require explicit approval)
 - **Release constraint:** Full Release 1.0 from T0, M00–M09 gates, no MVP or temporary engine.
-- **Primary authority:** [SPEC](../../../../SPEC.md) for behavior, [FEATURES](../../../../FEATURES.md) for observable behavior, [ARCHITECTURE](../../../../ARCHITECTURE.md) for structure, [ROADMAP](../../../../ROADMAP.md) for milestones, [TODO](../../../../TODO.md) for stable tasks, [AGENTS](../../../../AGENTS.md) for change control.
+- **Primary authority:** [SPEC](../../../SPEC.md) for behavior, [FEATURES](../../../FEATURES.md) for observable behavior, [ARCHITECTURE](../../../ARCHITECTURE.md) for structure, [ROADMAP](../../../ROADMAP.md) for milestones, [TODO](../../../TODO.md) for stable tasks, [AGENTS](../../../AGENTS.md) for change control.
 - **Evidence classification:** inspected planning baseline only. There is no runnable scaffold, verified CI, implementation PR, or independently validated acceptance evidence at kickoff.
 - **Execution authority:** creation of reviewable Sprint planning artifacts only. No agent dispatch, domain implementation, accepted policy, merge, release or Issue closure is implied.
 - **Existing tracking Issue:** [#2 — M00-02 Accounting and Delivery Decisions](https://github.com/lobridepaula/scm-simulator/issues/2)
