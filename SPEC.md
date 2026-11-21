@@ -62,7 +62,7 @@ The product choice determines the initial retail assortment, not a permanent com
 
 ### 3.2 Release 1.0 — in scope
 
-- Deterministic **320 × 240 tile (76,800 tile)** city, four zones, road hierarchy, districts and variable-sized lots.
+- Deterministic **160 × 120 tile (19,200 tile)** city, four zones, road hierarchy, districts and variable-sized lots.
 - Buyable lots, zoning restrictions, and location-based land prices.
 - Four establishment types: `store`, `factory`, `farm`, `warehouse`.
 - Mandatory catalog with **at least 60 tradable SKUs across at least 10 economic sectors**, with upstream resources, multi-stage recipes, buyers and retail demand; fruit/cheese/furniture are tutorial chains, not the full catalog.
@@ -93,12 +93,13 @@ These are extension candidates, not implicit implementation tasks.
 
 The city is generated from a seed and versioned world generation configuration.
 
-- **Default city size MUST be 320 × 240 tiles (76,800 total)**. These are configurable dimensions, but the standard Release 1.0 test fixtures MUST use this default.
+- **Default city size MUST be 160 × 120 tiles (19,200 total)**. These are configurable dimensions, but the standard Release 1.0 test fixtures MUST use this default.
 - A tile is a terrain/rendering cell. A lot is a permanent, non-overlapping contiguous footprint of tiles. Districts group lots and residential demand with distinct geographic/economic profiles.
 - Generate major arterial roads, collector/local streets, downtown and secondary centers, industrial/logistics areas, agricultural edges and residential clusters. All four zoning types MUST be represented.
 - Generate road-connected rectangular or otherwise validated lots with sizes suitable for stores, factories, farms and warehouses; zoning and ownership are evaluated at the lot level.
 - All operational establishments MUST have road access. Shortest valid road-path distance determines transport time and freight costs.
 - Seeded company allocation MUST yield a player starter site and at least 40 distinct AI counterparties with viable supplier and/or customer opportunities; an inaccessible decorative firm does not count.
+- The 160 × 120 default is a **spatial-capacity constraint**, not permission to lower the committed company, product or trading-market requirements. Generator validation MUST prove that the road hierarchy, residential demand, starter facilities, 50 starting AI firms, 40+ viable trading counterparties and available expansion lots coexist without collisions or inaccessible footprints; any infeasible seed/configuration MUST fail explicitly.
 - Seed, generator/scenario/catalog versions and ordered command history MUST reproduce the complete map, firm founding sequence, closures, orders and financial results. PRNG streams for world, demand, AI and market entry MUST be partitioned.
 
 **Generation order:** macro roads/districts → secondary roads/blocks → lots and zoning → population/land value → firms and facilities → route/market-coverage validation.
@@ -461,7 +462,7 @@ A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of tha
 ### 12.1 Screens
 
 **City / World**
-- 320 × 240 tile viewport-rendered city map with visible district, lots, road hierarchy, establishment and ownership layers; selectable lot footprints and toggles for zoning, competition, access and land value.
+- 160 × 120 tile viewport-rendered city map with visible district, lots, road hierarchy, establishment and ownership layers; selectable lot footprints and toggles for zoning, competition, access and land value.
 - Property detail card showing zone, land value, activity index, building compatibility, and current owner.
 - Context actions: purchase lot, construct eligible facility, inspect owner/facility.
 
@@ -564,7 +565,7 @@ The teacher SHOULD be able to compare results under the same seed, while recogni
 
 - **Language:** TypeScript with strict type-checking.
 - **UI:** React and Vite.
-- **Rendering:** Canvas 2D with viewport-culling, chunk caches, a spatial hit-test index and local versioned sprite manifest; SVG is acceptable for small overlays, not 76,800 separate DOM tiles.
+- **Rendering:** Canvas 2D with viewport-culling, chunk caches, a spatial hit-test index and local versioned sprite manifest; SVG is acceptable for small overlays, not 19,200 separate DOM tiles.
 - **Styling:** responsive CSS; component library optional, not mandatory.
 - **Simulation:** framework-independent TypeScript core library.
 - **Testing:** Vitest for unit and simulation tests; Playwright is an optional end-to-end choice.
@@ -594,7 +595,7 @@ Dependencies SHOULD be lightweight and justified. The simulation MUST NOT depend
 │   │   └── learning/
 │   ├── simulation/
 │   │   ├── engine/           # Scheduler, PRNG, command processor
-│   │   ├── world/            # 320x240 city, road graph, districts, lots
+│   │   ├── world/            # 160x120 city, road graph, districts, lots
 │   │   ├── economy/          # Companies, offers, consumers, prices
 │   │   ├── procurement/      # B2B orders, reservations, fulfillment
 │   │   ├── inventory/        # Stocks, transfers, valuation
@@ -653,7 +654,7 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 
 ### 14.5 Performance and persistence
 
-- The 320 × 240 city and 40+ counterparties MUST be tested on representative classroom hardware with recorded frame/time/memory budgets.
+- The 160 × 120 city, 50 starting AI firms and 40+ accessible counterparties MUST be tested together on representative classroom hardware with recorded frame/time/memory budgets.
 - Simulation updates MUST be batched; use cached road/district/sector indices, spatial culling and chunk redraws rather than rerendering the full map per event.
 - If simulation time becomes significant, move engine advancement to a Web Worker without changing domain rules.
 - A saved game MUST include generator/scenario/catalog versions, PRNG streams, current day, road/lot data, assets, active/historical companies, lifecycle and entrant state, pending orders and commitments.
@@ -677,11 +678,11 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 ### 16.1 Core invariants (automated tests required)
 
 - [ ] Same seed + scenario configuration + actions yields identical map, order history, and final KPIs.
-- [ ] Every standard fixture generates 320 × 240 (76,800) tiles, all four zones, non-overlapping legal lots and a reachable road graph for all operating facilities.
+- [ ] Every standard fixture generates 160 × 120 (19,200) tiles, all four zones, non-overlapping legal lots and a reachable road graph for all operating facilities.
 - [ ] The player can discover and select at least 40 distinct, viable AI buyers and/or suppliers initially and at each completed day in the standard 30-day scenario.
 - [ ] The player can choose an AI **customer**, submit a feasible sales quote against a published buy request, and fulfill a resulting canonical SO/PO without duplicate settlement.
 - [ ] Entrants, firm growth/retrenchment, insolvency, liquidation and company closure produce stable historical IDs, correct financial/asset events and no disappearing pending orders.
-- [ ] 320 × 240 map renders with viewport-culling, successful hit-tests and usable navigation/accessibility on representative school devices.
+- [ ] 160 × 120 map renders with viewport-culling, successful hit-tests and usable navigation/accessibility on representative school devices.
 - [ ] Invalid building-zone combinations are rejected without state changes.
 - [ ] Only an owning company can build on a lot.
 - [ ] Two accepted orders cannot reserve the same stock unit twice.
@@ -720,7 +721,7 @@ The release is accepted only if all ten steps work without manually editing game
 **Release 1.0 is a single complete delivery, not a sequence of smaller public releases.** [ROADMAP.md](./ROADMAP.md) contains the implementation milestones M00–M09, and [TODO.md](./TODO.md) contains their issue-ready task IDs. Every system is designed from T0 for the full target.
 
 - M00–M01: establish complete domain, schema, PRNG and event contracts for large-scale geography and evolving companies.
-- M02: deliver seeded 320 × 240 terrain, roads, lots, districts, 40+ starting trade counterparties and geographic invariants.
+- M02: deliver seeded 160 × 120 terrain, roads, lots, districts, 40+ starting trade counterparties and geographic invariants.
 - M03–M05: deliver stock, finance, procurement, logistics, production, demand and multi-category products.
 - M06: deliver company AI plus entry, expansion, retrenchment, liquidation, closure and the minimum trading-market guarantee.
 - M07–M08: deliver chunked map renderer, searchable company directory, accessible UI, local persistence and classroom assessment.
@@ -733,7 +734,7 @@ The release is accepted only if all ten steps work without manually editing game
 - A single city and single player-run company per local game.
 - At least 40 trade-accessible AI companies at each completed day in standard presets, with funded founding and explicit closure/lifecycle; count and strategy parameters remain configurable upward.
 - All B2B trades require traceable orders; no instantaneous stock teleportation.
-- Default city 320 × 240 tiles with roads, districts and variable-size lots; four zones and residential construction prohibited.
+- Default city 160 × 120 tiles with roads, districts and variable-size lots; four zones and residential construction prohibited.
 - Store/factory/farm/warehouse building types; companies may acquire, expand, retire and transfer facilities through recorded transactions.
 - Revenue, simplified net profit, and ROI are headline metrics; cash is visible separately.
 - Browser-only TypeScript implementation on GitHub/Vercel; Canvas 2D chunk rendering and verified local assets; no paid AI or cloud dependency.
