@@ -1,7 +1,7 @@
 # M00-S01 — STORY_001: Release 1.0 Requirements Traceability
 
 Stage: **tasks-populated**  
-Document revision: **4**  
+Document revision: **5**  
 Last editor: `project-manager`  
 Registration: **confirmed** (GitHub planning branch `planning/m00-s01-story-context`; draft PR #86; not merged into `main`)
 
@@ -54,7 +54,7 @@ Changing business rules, accepting ADRs, moving feature scope to later releases,
 | TL-ID | Responsible plugin | Concrete action | Expected deliverable | Independent reviewer | Status | Evidence / blocker |
 |---|---|---|---|---|---|---|
 | TL-001 | Project Manager | Decompose SPEC §§3–16 into source-anchored atomic MUST, SHOULD, optional and excluded requirements; record precise clauses and classifications without changing normative text. | Atomic requirement rows in the single proposed `docs/quality/REQUIREMENTS_TRACEABILITY.md` index. | Quality Auditor | For review | [PR #87](https://github.com/lobridepaula/scm-simulator/pull/87), requirements index commit `57eb3d5`; 368 candidate atomic locators; QA semantic sign-off pending. |
-| TL-002 | Project Manager | For each requirement, link FEATURES F01–F16 and J01–J05, TODO Mxx-Tyy, existing Issue, M00–M09 milestone, learning outcome and SPEC §16 verification oracle; flag absent links. | Bidirectional traceability rows covering mandatory features, journeys, tests and owners; explicit unlinked list. | Quality Auditor | To do | Depends on TL-001; no implementation or verified-test claims. |
+| TL-002 | Project Manager | For each requirement, link FEATURES F01–F16 and J01–J05, TODO Mxx-Tyy, existing Issue, M00–M09 milestone, learning outcome and SPEC §16 verification oracle; flag absent links. | Bidirectional traceability rows covering mandatory features, journeys, tests and owners; explicit unlinked list. | Quality Auditor | For review | [Index + journey crosswalk](https://github.com/lobridepaula/scm-simulator/blob/work/m00-s01-requirements-index/docs/quality/REQUIREMENTS_TRACEABILITY.md): F01–F16, J01–J05, M00–M09/Issues, oracle candidates; Issue-key duplicates #19/#21 and #20/#22 remain unresolved. Independent semantic approval pending. |
 | TL-003 | Software Architect | Independently check every mapped requirement's owner, domain interfaces and architectural invariant against ARCHITECTURE §§4–8, 11 and 19; report conflicting or missing ownership, read-only. | Source-linked module/contract ownership review returned to Project Manager for the same index. | Quality Auditor | To do | Depends on TL-001; advisory review only; do not edit the matrix concurrently. |
 | TL-004 | Project Manager | Reconcile index links with README, SPEC §17, ROADMAP and TODO full Release 1.0 strategy; identify contradictory, missing or unapproved scope statements without altering authorities. | Explicit requirement/feature/task/learning gap and conflict section in the same matrix with proposed corrections for PO review. | Quality Auditor | To do | Depends on TL-002 and TL-003; #1 is baseline gate G1. |
 | TL-005 | Project Manager | Specify reproducible bidirectional completeness, stable-row-key, orphan-ID and source-link checks with negative cases; run only using available authorized tooling and record actual results. | Documented validation procedure and real outputs where run, otherwise `not run` with concrete missing setup. | Quality Auditor | To do | Depends on TL-002 and TL-004; no CI/scaffold exists at kickoff. |
