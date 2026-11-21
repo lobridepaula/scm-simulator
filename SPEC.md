@@ -54,7 +54,7 @@ The game MUST make the consequences of decisions visible. It MUST NOT require a 
 - The player creates or names a company and chooses an initial commercial product: **fruit**, **cheese**, or **furniture**.
 - The tutorial scenario grants a small starter retail establishment on a valid commercial lot, with the land/building reflected as opening assets. This prevents construction from blocking the first lesson.
 - The player receives an initial equity contribution, an operating cash balance, and access to supplier listings.
-- The city contains **at least 40 simultaneously trade-accessible AI companies**, spanning complementary and competing sectors, with company formation and closure throughout play.
+- The default city initializes **50 AI companies**, sustaining **at least 40 independent, active and trade-accessible AI companies** at scenario creation and completed-day boundaries, spanning many sectors, including supplier and customer choices, with founding and closures over time.
 - The player must issue at least one purchase order, receive the goods, sell them to consumers, and inspect the financial results.
 - Later in the same game, the player may buy an eligible lot, build another establishment, and buy from or sell to AI companies.
 
@@ -65,11 +65,11 @@ The product choice determines the initial retail assortment, not a permanent com
 - Deterministic **320 × 240 tile (76,800 tile)** city, four zones, road hierarchy, districts and variable-sized lots.
 - Buyable lots, zoning restrictions, and location-based land prices.
 - Four establishment types: `store`, `factory`, `farm`, `warehouse`.
-- Broad multi-category product catalog and configurable manufacturing recipes; fruit, cheese and furniture are educational starter chains, not the full catalog.
+- Mandatory catalog with **at least 60 tradable SKUs across at least 10 economic sectors**, with upstream resources, multi-stage recipes, buyers and retail demand; fruit/cheese/furniture are tutorial chains, not the full catalog.
 - Distinct inventory per establishment.
-- Business-to-business (B2B) purchase/sales orders, delivery lifecycle, and receiving.
+- B2B purchase and sales orders, **player-selected suppliers and B2B customers**, seller-originated sales quotations/acceptance, delivery lifecycle and receiving.
 - Basic consumer (B2C) retail sales and demand.
-- At least 40 active, trade-accessible AI company counterparties at standard scenario day boundaries, with endogenous market entry, expansion, distress, liquidation and closure.
+- Default **50 generated AI companies** and **40 or more active trade-accessible counterparts** per completed day, including **at least 15 supplier and 15 B2B customer options** (roles may overlap); endogenous market entry, expansion, distress, liquidation and closure.
 - Cash accounting, recognized revenue, cost of goods sold, operating expenses, profit, ROI, and supporting metrics.
 - 30-day scenario, pause/advance-day control, basic tutorial, teacher scenario presets, local saving, and results export.
 - Viewport-culled 2D city map with selectable lots, establishments, property overlays and a searchable market-company directory.
@@ -161,7 +161,7 @@ A company has an ID, owner type (`player` or `ai`), name, cash balance, equity c
 - Within-company goods movements MUST be recorded as **stock transfer orders**, not as external sales or company revenue.
 - Each company has a stable ID, industry, lifecycle state, founded day, facilities, offers/requests and ledger. One company can compete with and supply another.
 - **Trade-accessible** means discoverable in the company directory, reachable via the road network, operational and having at least one feasible B2B supplier offer and/or buyer purchasing opportunity under catalog rules.
-- Standard classroom scenarios MUST start with, and finish each completed simulated day with, **at least 40 distinct AI counterparties**, excluding the player. The guarantee refers to available counterparty choice, not mandatory transactions with 40 firms.
+- Standard classroom scenarios MUST **start with 50 AI firms** and finish each completed simulated day with **at least 40 active, independent, trade-accessible AI counterparties**, including at least 15 suppliers and 15 B2B customers (roles may overlap), excluding the player. The guarantee refers to available counterparty choice, not mandatory transactions with 40 firms.
 
 ### 5.2 Establishment types
 
@@ -193,7 +193,7 @@ Each establishment MUST have a unique ID, company ownership, parent lot, current
 
 Every product requires a unique ID, localized display name, unit, category, reference price, purchase/sale eligibility, and optional recipe.
 
-The broader Release 1.0 catalog MUST span multiple connected product families (including agricultural goods, raw materials, industrial inputs and finished consumer goods) and support realistic supplier/customer selection across the active companies. Product and recipe graphs MUST be validated for sources and viable buyers.
+The complete Release 1.0 catalog MUST contain **60 or more distinct, tradable product IDs across at least 10 sectors**, such as agriculture, dairy, processed food, beverages, timber, furniture, textiles, packaging, building materials, cleaning supplies, home goods and industrial components. Each SKU MUST have a unit, price, legal source/recipe, B2B/B2C eligibility and feasible buyer(s); all manufactured SKUs must have reachable upstream inputs. Product graphs and sector supply/demand coverage MUST pass scenario validation.
 
 Recommended starter chains:
 
@@ -259,6 +259,8 @@ Inventory invariants:
 - Settlement: recognition of cash payable/receivable according to the simplified payment rule.
 
 The engine MUST NOT create two independent financial transactions merely because users see both PO and SO views.
+
+**Supplier selection:** the player MUST search/filter suppliers by firm, SKU, price, stock, road distance, freight and lead time and submit a PO to the selected seller. **Customer selection:** the player MUST inspect explicit AI purchase requirements (product, quantity, target price, expiry), choose the buying firm and submit a seller-side quote. Acceptance MUST create **one canonical buyer PO / seller SO** with the existing stock, cash, capacity, routing and settlement safeguards; rejection MUST NOT move stock, funds or invent revenue.
 
 **B2C retail** uses automatically generated aggregated consumer orders/sales receipts. Household purchases MUST consume store inventory and generate revenue but do not require an establishment-to-establishment PO.
 
@@ -352,7 +354,7 @@ A simple deterministic weighted-choice allocation across available stores is suf
 
 ### 8.2 Price setting
 
-- AI sellers publish unit-price offers for selected products.
+- AI sellers publish unit-price offers; AI buyers publish dated product/quantity/target-price requirements for selectable player-originated sales opportunities.
 - The player may compare supplier price, estimated freight, and delivery time before issuing an order.
 - Store retail prices are editable subject to scenario-defined safe min/max ranges if needed.
 - A lower retail price SHOULD increase a store’s relative demand capture, but MUST NOT guarantee profitability.
@@ -360,17 +362,17 @@ A simple deterministic weighted-choice allocation across available stores is suf
 
 ## 9. AI Competitors and Company Ecology
 
-Release 1.0 uses **deterministic rule-based AI**, without paid generative models. The standard city contains 40 or more independently operating and trade-accessible AI companies, with diverse industries, product portfolios, prices, facility locations and purchasing preferences.
+Release 1.0 uses **deterministic rule-based AI**, without paid generative models. Default seeds initialize **50 independent firms** and expose **at least 40 currently trade-accessible firms** (at least 15 suppliers and 15 customers), with 60+ SKUs, 10+ sectors, competing strategies, facilities and purchasing preferences. The population is procedural and scenario-configurable rather than a hardcoded roster.
 
 ### 9.1 Operating behavior
 
-AI firms MUST publish feasible offers and/or purchasing opportunities; respond to purchase orders; choose suppliers using cost, freight, reliability and lead time; replenish inventory; produce eligible recipes; compete for retail demand; and transact with player and AI customers. All decisions MUST issue the same typed, validated commands and obey the same economic constraints as the player. Strategies use configurable stock targets, price sensitivity, expansion thresholds and risk tolerance. Contention tie-breaks and AI evaluation order MUST be stable.
+AI firms MUST publish feasible sell offers and explicit buying requirements; respond to purchase orders and seller-initiated customer quotes; choose suppliers using cost, freight, reliability and lead time; replenish inventory; produce eligible recipes; compete for retail demand; and transact with player and AI customers. All decisions MUST issue the same typed, validated commands and obey the same economic constraints as the player. Strategies use configurable stock targets, price sensitivity, expansion thresholds and risk tolerance. Contention tie-breaks and AI evaluation order MUST be stable.
 
 ### 9.2 Founding, growth and closure
 
 An AI firm's lifecycle MUST be explicit: emerging, active/stable, growing, struggling, insolvent, liquidating and closed (or equivalent documented states). Financial insolvency rules in §10 remain authoritative; the lifecycle is not a second competing accounting state.
 
-- **Founding:** a deterministic market-opportunity process scores unmet demand, local competition, upstream inputs, prospective margin, site accessibility and initial capital. Entrants need a legal road-connected establishment and documented funded equity; never conjure stock or cash without ledger entries.
+- **Founding:** a deterministic market-opportunity process scores unmet demand, local competition, upstream inputs, prospective margin, site accessibility and initial capital. Entrants need a legal road-connected establishment and **equity from a finite, scenario-defined external-investor funding pool**, recorded as contributed capital rather than revenue; never conjure stock, land or cash without ledger entries.
 - **Growth:** companies may buy lots, open facilities, expand product ranges or integrate vertically through ordinary commands.
 - **Retrenchment:** unprofitable firms may cut output, close facilities or liquidate assets; configurable consecutive-day thresholds prevent instant closures from one bad day.
 - **Insolvency and liquidation:** companies with insufficient funding stop creating ineligible new commitments. Existing accepted orders, reserved cash, shipments, title and property remain traceable and are settled, cancelled or resolved via explicit deterministic liquidation rules. Closure never deletes history or duplicates stock/funds.
@@ -467,7 +469,7 @@ A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of tha
 
 **Orders**
 - Tabs/views for `Purchases`, `Sales`, `Internal Transfers`, and `Shipments`.
-- Order creation form, supplier comparison, order history, lifecycle/status, and issue explanations.
+- Purchase order creation, multi-supplier comparison, customer choice, seller-side quotation and accepted/rejected outcomes, order history, lifecycle/status and issue explanations.
 - Detail view MUST visually distinguish PO and SO roles without duplicate ledger entries.
 
 **Facilities / Inventory**
@@ -478,7 +480,7 @@ A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of tha
 - Search and filter 40 or more trade-accessible companies by product category, supplier/customer role, district, published offers, requested goods, unit prices, freight and lead time.
 - Select named AI suppliers or customer companies and inspect their establishments, availability, order history and company lifecycle.
 - Expose newly founded and closed firms; historical firms cannot submit or accept fresh commercial orders.
-- Supplier offers from AI and eventually the player.
+- Supplier offers from AI and the player, visible B2B customer purchasing needs, supplier/client comparisons and quote status.
 
 **Learning / Missions**
 - Current objective, short definitions, optional hints, and evidence of completed tasks.
@@ -626,6 +628,7 @@ Dependencies SHOULD be lightweight and justified. The simulation MUST NOT depend
 ```ts
 type GameCommand =
   | { type: 'SUBMIT_PURCHASE_ORDER'; buyerFacilityId: string; sellerFacilityId: string; productId: string; quantity: number }
+  | { type: 'SUBMIT_SALES_QUOTE'; sellerFacilityId: string; buyerFacilityId: string; productId: string; quantity: number; unitPriceCents: number }
   | { type: 'SET_RETAIL_PRICE'; facilityId: string; productId: string; unitPriceCents: number }
   | { type: 'BUY_LOT'; lotId: string }
   | { type: 'BUILD_FACILITY'; lotId: string; facilityType: 'store' | 'factory' | 'farm' | 'warehouse' }
@@ -634,6 +637,9 @@ type GameCommand =
 type GameEvent =
   | { type: 'ORDER_CONFIRMED'; orderId: string; day: number }
   | { type: 'ORDER_REJECTED'; orderId: string; day: number; reason: string }
+  | { type: 'SALES_QUOTE_ACCEPTED'; quoteId: string; orderId: string; day: number }
+  | { type: 'COMPANY_FOUNDED'; companyId: string; day: number }
+  | { type: 'COMPANY_CLOSED'; companyId: string; day: number }
   | { type: 'GOODS_RECEIVED'; orderId: string; shipmentId: string; day: number }
   | { type: 'PRODUCTION_COMPLETED'; facilityId: string; recipeId: string; batches: number; day: number }
   | { type: 'RETAIL_SALE'; facilityId: string; productId: string; quantity: number; day: number }
@@ -685,6 +691,8 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 - [ ] A stock purchase changes cash and inventory but not immediate COGS.
 - [ ] At delivery, a B2B sale records seller revenue and seller COGS once.
 - [ ] Ledger-derived simplified net profit and ROI match the displayed dashboard.
+- [ ] 60+ SKUs in 10+ sectors have valid supply/recipe/buyer paths; 50 default AI firms and at least 40 active road-connected trading partners (15 supplier/15 customer options) remain selectable each completed day.
+- [ ] A player-selected customer's accepted quote creates exactly one PO/SO; rejected quotes create no goods or revenue; startup equity remains non-revenue and entry/exit replay is deterministic.
 - [ ] Player and AI commands follow the same business validity rules.
 - [ ] Saving/loading preserves pending orders, shipments, commitments, and financial state.
 
@@ -692,13 +700,13 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 
 1. Create a game with a fixed classroom seed.
 2. Choose cheese as the initial store product.
-3. Inspect at least two supplier offers and their landed costs.
+3. Select two independently owned suppliers in the company directory and compare their landed costs.
 4. Issue a PO to an AI cheese factory and confirm the mirrored SO.
 5. Advance time, follow shipment progress, and receive the goods.
 6. Sell stock to residential consumers and verify the receipt/revenue ledger.
 7. Inspect profit, cash, and ROI, explaining why they differ.
 8. Purchase a valid lot, construct an eligible facility, and inspect the resulting change in cash/assets.
-9. Receive or fulfill a B2B trade with another AI company.
+9. Select an AI customer from its published buying requirements; submit a seller quote and inspect an accepted canonical B2B order or its explicit rejection.
 10. Complete the 30-day activity and export a scenario report.
 
 The release is accepted only if all ten steps work without manually editing game state.
