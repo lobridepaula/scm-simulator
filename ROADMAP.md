@@ -19,7 +19,7 @@ The architecture must accommodate the final specified system **from T0**: world 
 
 ## 2. Target Release 1.0: definition of completeness
 
-Release 1.0 supports: (a) seeded, reproducible, road-connected city with four zones; (b) lot acquisition and legitimate construction of store/factory/farm/warehouse; (c) fruit, cheese, and furniture supply chains with production/extraction and capacity-constrained inventory; (d) one authoritative B2B order with PO/SO views, reservation, dispatch, shipment, receipt and settlement; (e) internal transfers that do not invent revenue; (f) B2C demand, retail competition and price setting; (g) three autonomous companies that buy, sell and compete under the same validity rules as the player; (h) auditable cash, assets, revenue, COGS, expenses, simplified net profit and ROI; (i) complete pt-BR user experience with keyboard-accessible controls and alternative facility navigation; (j) 30-day teacher presets, guided learning, local saves, reflection, and JSON/CSV exports; and (k) reproducible CI tests plus static Vercel publication, without login or paid services.
+Release 1.0 supports: (a) reproducible **320 × 240 tile (76,800 tile)** city with district hierarchy, connected roads, variable-sized lots and four zones; (b) lot acquisition and lawful building/retirement of store/factory/farm/warehouse; (c) broad multi-category product networks, including guided fruit, cheese and furniture chains, with capacity-limited production/inventory; (d) authoritative B2B PO/SO workflows, shipments, receiving, settlement and internal transfers; (e) B2C retail demand, competition and pricing; (f) **at least 40 simultaneously accessible AI commercial counterparties** in standard presets, with deterministic founding, expansion, contraction, insolvency, liquidation and exit; (g) auditable financial ledger and KPIs; (h) full pt-BR interface, viewport-culling Canvas map, overlays and buyer/supplier directory; (i) 30-day teacher exercises, accessible workflows, local saves, reflection and CSV/JSON exports; and (j) CI plus static Vercel publication without login or paid services.
 
 ### Invariants that apply to every milestone
 
@@ -34,18 +34,18 @@ Release 1.0 supports: (a) seeded, reproducible, road-connected city with four zo
 
 ## 3. Architectural baseline and workstreams
 
-Use `SPEC.md` §14 as the architecture baseline: React + Vite UI, independent TypeScript simulation engine, SVG or Canvas city visualization, schema-validated JSON scenario data, IndexedDB/local JSON persistence, Vitest, browser E2E tests, and GitHub-based static deployment on Vercel. Keep internal names and technical documentation in English; player-facing content in pt-BR.
+Use `SPEC.md` §14 as the architecture baseline: React + Vite UI, independent TypeScript simulation engine, viewport-culled Canvas 2D city with local verified sprite assets, schema-validated JSON scenario data, IndexedDB/local JSON persistence, Vitest, browser E2E tests, and GitHub-based static deployment on Vercel. Keep internal names and technical documentation in English; player-facing content in pt-BR.
 
 Workstreams run throughout the roadmap, even when a milestone is primarily focused elsewhere:
 
 | Workstream | Owns | First established |
 |---|---|---|
 | Simulation kernel | Commands, domain events, deterministic scheduler, PRNG, projections | M00–M01 |
-| Geography and ownership | Road graph, city, zoning, land and facilities | M00–M02 |
+| Geography and ownership | 320×240 tiles, districts, road graph, lot footprints, land, facilities, map asset contract | M00–M02 |
 | Economy and finance | Inventory, valuation, commitments, ledger, KPIs | M00–M03 |
 | Supply chain | Orders, shipment custody, transfer, settlement | M00–M04 |
 | Markets and operations | Extraction, manufacturing, consumer demand, prices | M00–M05 |
-| AI | Shared command rules, policies, scheduling, competition | M00–M06 |
+| AI and market ecology | Shared commands, 40+ counterparts, market entry/exit, firm lifecycle, competition | M00–M06 |
 | User experience | Navigation, map, panels, localization, accessibility | M00 onward; integration M07 |
 | Education | Curriculum evidence, missions, presets, teacher results | M00 onward; integration M08 |
 | Persistence/quality/release | Versioning, fixtures, saves, CI, performance, publication | M00 onward; acceptance M09 |
@@ -72,9 +72,9 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** complete the geographic and ownership rules that constrain the economy.
 
-**Deliverables:** seed-based 2D city, roads and shortest-path routing, four zoning types, residential demand clusters, purchasable lots, land price/accessibility calculation, ownership and building eligibility, starter lot, establishment identities/capacities/operational states, map projection and navigation access.
+**Deliverables:** deterministic 320 × 240 tile world, arterial/collector/local road graph, shortest-path routing, four coherent zones, district demand clusters, variable-size non-overlapping purchasable lots, land price/accessibility indices, legal facility placement/ownership, starter lot, initial diverse 40+ viable AI company/facility network, chunkable map projections and accessible navigation.
 
-**Exit gate:** all test seeds produce valid districts and starter trade connectivity; invalid zoning/ownership actions have no effects; road distance and lot values are deterministic and inspectable.
+**Exit gate:** multi-seed standard fixtures yield exactly 76,800 tiles, valid lots and zones, full facility-road access and initial 40+ trade-accessible AI firms; placement rejection is atomic; land values, routes and projections replay deterministically.
 
 ### M03 — Inventory, commitments and financial integrity
 
@@ -102,17 +102,17 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 ### M06 — Autonomous competitor economy
 
-**Objective:** make three independent computer companies participate in the same economy as the player.
+**Objective:** sustain a competitive, evolving multi-sector city with at least 40 viable AI counterparties available for the player to select as suppliers/customers.
 
-**Deliverables:** AI company starting networks, offers, reorder policies, supplier choices, purchasing from player/AI, production decisions, retail pricing, competition, fair resource contention and configurable policy parameters; no privileged information or free goods; stable company execution order. AI expansion only if promoted into the committed Release 1.0 scope.
+**Deliverables:** multi-sector firm policies and offers/buyer demand; player and AI supplier/customer choice; fair contention; adaptive replenishment, pricing and production; endogenous company founding, lot acquisition, facility expansion/retrenchment, company distress, insolvency, liquidation, asset turnover and closure; funded entrant reserve maintaining the completed-day 40-counterparty minimum; auditable events and stable bounded decisions.
 
-**Exit gate:** a deterministic 30-day scenario executes with the player and three active AI companies; all commands pass shared rules; AI-to-player and AI-to-AI trades work; simulated outcomes replay exactly.
+**Exit gate:** deterministic 30-day campaign preserves at least 40 viable, road-reachable AI counterparties at each completed day; verifies entering/exiting companies, asset/liability continuity, correct open-order handling, buyer/supplier access, shared rules and byte-identical replay.
 
 ### M07 — Complete player interface and interaction
 
 **Objective:** expose every committed domain capability through a coherent, accessible application, not isolated debugging panels.
 
-**Deliverables:** city/lot/facility map with pan, zoom and selection; company and financial dashboards; purchase/sales/transfer/shipment views; supplier comparison and order forms; inventory, production and pricing panels; market comparison; relevant alerts, trends, glossary entry points, and responsive pt-BR experience. UI shell and design system have existed since M00; M07 integrates and finishes the product experience.
+**Deliverables:** viewport-culling Canvas city view (320×240 default) with pan/zoom, lot selection, zone/ownership/competition/accessibility overlays, locally served licensed sprites, searchable/filterable directory of 40+ AI suppliers and customers, company lifecycle news, company/finance dashboards, purchase/sales/shipment forms, inventory and pricing panels, alerts, glossary and responsive pt-BR experience.
 
 **Exit gate:** no mandatory action requires developer tools, raw JSON editing or map-only navigation; critical actions are operable with keyboard and pointer; financial and order displays match the engine.
 
@@ -128,7 +128,7 @@ Workstreams run throughout the roadmap, even when a milestone is primarily focus
 
 **Objective:** verify the **whole promised product**, then publish it.
 
-**Deliverables:** complete `SPEC.md` §16 invariant suite; browser E2E for all ten educational scenario steps; deterministic regression fixtures; accessibility and localization audit; target school-device performance checks; safe import boundary testing; CI release gates; updated user/contributor docs; static Vercel deployment; release notes and version tags.
+**Deliverables:** complete `SPEC.md` §16 invariant suite; full 320×240 city and 40+ AI market seed/day-boundary coverage tests; entrant/closure and pending-order conservation regressions; browser E2E for all classroom steps; viewport FPS/memory and day-advance performance checks on school devices; asset license audit; accessibility/localization/privacy tests; CI and Vercel deployment.
 
 **Exit gate:** every mandatory acceptance criterion passes; no critical/high-severity unresolved release blocker; full 30-day classroom path works without state editing; production URL is verified; downloadable data/report outputs work. **Only then** is the project called Release 1.0.
 
@@ -171,13 +171,14 @@ Track each checklist item in `TODO.md` as an independent GitHub issue when it re
 
 ## 7. Documentation synchronization required before development
 
-The existing `SPEC.md` and `README.md` describe “initial release,” “first playable,” and milestones A/B/C. To avoid competing authorities:
+The committed Release 1.0 scope in `SPEC.md` includes the 320 × 240 world, multi-sector product catalog, minimum 40 AI counterparties, deterministic company lifecycle and asset management. Keep the issue backlog in `TODO.md` aligned to these requirements. `README.md` summarizes rather than redefining them.
 
-1. Update `SPEC.md` §17 to reference this roadmap as implementation sequence, not as separate progressively scoped releases.
-2. Replace its “first playable”/“Later” planning language with a **Release 1.0 feature contract** and explicit out-of-scope/future-change policy; preserve the business rules and pedagogical intent.
-3. Update `README.md` roadmap and project-documentation links to `ROADMAP.md` and `TODO.md`.
-4. Keep financial formulas, detailed domain rules and BNCC rationale in `SPEC.md`; **do not duplicate them as new normative rules** here.
-5. Reevaluate the optional items within the committed specification (such as AI expansion and EM13MAT303 financing) explicitly rather than silently converting them into mandatory tasks.
+1. Record architecture decisions for lot footprints, road/chunk data structures, lifecycle and order/asset liquidation semantics before implementation.
+2. Treat AI founding and closure as committed work, **not optional expansion**.
+3. Keep financial formulas, economic invariants, precise geography and lifecycle rules normative only in `SPEC.md`.
+4. Maintain licensed asset provenance and test seed/performance baselines as implementation evolves.
+5. Changes to capabilities or market-floor thresholds require coordinated specification, roadmap, TODO and acceptance test updates.
+
 
 ## 8. Release 1.0 final acceptance scenario
 
