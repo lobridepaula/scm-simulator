@@ -1,8 +1,8 @@
 # M00-S01 — STORY_001: Release 1.0 Requirements Traceability
 
 Stage: **tasks-populated**  
-Document revision: **14**  
-Last editor: `quality-auditor`  
+Document revision: **15**  
+Last editor: `project-manager`  
 Registration: **confirmed** (GitHub planning branch `planning/m00-s01-story-context`; draft PR #86; not merged into `main`)
 
 ## Story Context
@@ -53,7 +53,7 @@ Changing business rules, accepting ADRs, moving feature scope to later releases,
 
 | TL-ID | Responsible plugin | Concrete action | Expected deliverable | Independent reviewer | Status | Evidence / blocker |
 |---|---|---|---|---|---|---|
-| TL-001 | Project Manager | Decompose SPEC §§3–16 into source-anchored atomic MUST, SHOULD, optional and excluded requirements; record precise clauses and classifications without changing normative text. | Atomic requirement rows in the single proposed `docs/quality/REQUIREMENTS_TRACEABILITY.md` index. | Quality Auditor | For review | [PR #87](https://github.com/lobridepaula/scm-simulator/pull/87), requirements index commit `57eb3d5`; 368 candidate atomic locators; QA semantic sign-off pending. |
+| TL-001 | Project Manager | Decompose SPEC §§3–16 into source-anchored atomic MUST, SHOULD, optional and excluded requirements; record precise clauses and classifications without changing normative text. | Atomic requirement rows in the single proposed `docs/quality/REQUIREMENTS_TRACEABILITY.md` index. | Quality Auditor | For review | [Latest candidate index + PM check](https://github.com/lobridepaula/scm-simulator/pull/87#issuecomment-7068412276), PR #87 head `92bb671` / blob `151c79d`: 380 unique source-anchored clause rows across SPEC §§3–16, including 332 mandatory/acceptance references. Normative sources unchanged; independent semantic acceptance pending. |
 | TL-002 | Project Manager | For each requirement, link FEATURES F01–F16 and J01–J05, TODO Mxx-Tyy, existing Issue, M00–M09 milestone, learning outcome and SPEC §16 verification oracle; flag absent links. | Bidirectional traceability rows covering mandatory features, journeys, tests and owners; explicit unlinked list. | Quality Auditor | For review | [Index + journey crosswalk](https://github.com/lobridepaula/scm-simulator/blob/work/m00-s01-requirements-index/docs/quality/REQUIREMENTS_TRACEABILITY.md): F01–F16, J01–J05, M00–M09/Issues, oracle candidates; Issue-key duplicates #19/#21 and #20/#22 remain unresolved. Independent semantic approval pending. |
 | TL-003 | Software Architect | Independently check every mapped requirement's owner, domain interfaces and architectural invariant against ARCHITECTURE §§4–8, 11 and 19; report conflicting or missing ownership, read-only. | Source-linked module/contract ownership review returned to Project Manager for the same index. | Quality Auditor | For review | [Architecture ownership review on PR #87](https://github.com/lobridepaula/scm-simulator/pull/87#issuecomment-7060399328) at `57eb3d5` (368 rows inspected; 46 generic owners, high-risk mapping/classification gaps); Project Manager TL-004 correction and independent Quality Auditor review pending. |
 | TL-004 | Project Manager | Reconcile index links with README, SPEC §17, ROADMAP and TODO full Release 1.0 strategy; identify contradictory, missing or unapproved scope statements without altering authorities. | Explicit requirement/feature/task/learning gap and conflict section in the same matrix with proposed corrections for PO review. | Quality Auditor | For review | [Project Manager QA finding repairs](https://github.com/lobridepaula/scm-simulator/pull/87#issuecomment-7068047941) at PR #87 head `7eb472d`; corrected modality/optional-scope and ownership/source links, now 380 rows. Quality Auditor independent re-review pending; TODO/Issue label drift deferred to Issue Controller. |
