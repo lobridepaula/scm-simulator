@@ -457,7 +457,7 @@ A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of tha
 ### 12.1 Screens
 
 **City / World**
-- 2D map colored by district with recognizable establishments, selectable lots, roads, and ownership indicators.
+- 320 × 240 tile viewport-rendered city map with visible district, lots, road hierarchy, establishment and ownership layers; selectable lot footprints and toggles for zoning, competition, access and land value.
 - Property detail card showing zone, land value, activity index, building compatibility, and current owner.
 - Context actions: purchase lot, construct eligible facility, inspect owner/facility.
 
@@ -474,8 +474,10 @@ A manufacturing output generated in step 6 MUST NOT be sold B2B in step 4 of tha
 - Facility capacities, on-hand and reserved stock, production recipe, sale prices, and product offers.
 - Warnings for empty stock, overcommitted purchasing funds, or unavailable recipes.
 
-**Market**
-- Available supplier offers and competing store prices with expected landed cost and lead time.
+**Market / Company Directory**
+- Search and filter 40 or more trade-accessible companies by product category, supplier/customer role, district, published offers, requested goods, unit prices, freight and lead time.
+- Select named AI suppliers or customer companies and inspect their establishments, availability, order history and company lifecycle.
+- Expose newly founded and closed firms; historical firms cannot submit or accept fresh commercial orders.
 - Supplier offers from AI and eventually the player.
 
 **Learning / Missions**
@@ -558,7 +560,7 @@ The teacher SHOULD be able to compare results under the same seed, while recogni
 
 - **Language:** TypeScript with strict type-checking.
 - **UI:** React and Vite.
-- **Rendering:** simple SVG or Canvas 2D map, chosen for ease of testing and performance.
+- **Rendering:** Canvas 2D with viewport-culling, chunk caches, a spatial hit-test index and local versioned sprite manifest; SVG is acceptable for small overlays, not 76,800 separate DOM tiles.
 - **Styling:** responsive CSS; component library optional, not mandatory.
 - **Simulation:** framework-independent TypeScript core library.
 - **Testing:** Vitest for unit and simulation tests; Playwright is an optional end-to-end choice.
@@ -588,16 +590,17 @@ Dependencies SHOULD be lightweight and justified. The simulation MUST NOT depend
 │   │   └── learning/
 │   ├── simulation/
 │   │   ├── engine/           # Scheduler, PRNG, command processor
-│   │   ├── world/            # City generation, lots, zoning, paths
+│   │   ├── world/            # 320x240 city, road graph, districts, lots
 │   │   ├── economy/          # Companies, offers, consumers, prices
 │   │   ├── procurement/      # B2B orders, reservations, fulfillment
 │   │   ├── inventory/        # Stocks, transfers, valuation
 │   │   ├── production/       # Recipes and processing
 │   │   ├── logistics/        # Distance, dispatch, transit, receipt
 │   │   ├── finance/          # Ledger, accounting, KPIs
-│   │   ├── ai/               # Deterministic strategies
+│   │   ├── ai/               # Firm strategies, market entry/exit
 │   │   └── learning/         # Missions, objectives, results
-│   ├── data/                 # Versioned catalogs and scenario JSON
+│   ├── data/                 # Versioned multi-sector catalogs and scenarios
+│   ├── assets/               # Sprite catalog and licensing manifest
 │   ├── persistence/          # Save/load, migration, import/export
 │   ├── localization/         # pt-BR strings and glossary
 │   └── tests/
@@ -641,10 +644,10 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 
 ### 14.5 Performance and persistence
 
-- The main game loop SHOULD finish a day transition promptly on standard school laptops.
-- Simulation updates SHOULD be batched; avoid rerendering every map tile and facility for each internal event.
+- The 320 × 240 city and 40+ counterparties MUST be tested on representative classroom hardware with recorded frame/time/memory budgets.
+- Simulation updates MUST be batched; use cached road/district/sector indices, spatial culling and chunk redraws rather than rerendering the full map per event.
 - If simulation time becomes significant, move engine advancement to a Web Worker without changing domain rules.
-- A saved game MUST include generator version, scenario version, PRNG state, current day, all authoritative world state, and pending transactions.
+- A saved game MUST include generator/scenario/catalog versions, PRNG streams, current day, road/lot data, assets, active/historical companies, lifecycle and entrant state, pending orders and commitments.
 - Save migrations MUST explicitly handle version changes or reject incompatible saves with a clear message.
 - JSON imports MUST be schema-validated and treated as untrusted data.
 - The initial game SHOULD work offline after its assets are loaded, but full PWA installation is not required.
@@ -665,7 +668,10 @@ These are illustrative interface boundaries. Implementation MUST also type inter
 ### 16.1 Core invariants (automated tests required)
 
 - [ ] Same seed + scenario configuration + actions yields identical map, order history, and final KPIs.
-- [ ] City generation produces all four zones, valid lots, and a connected trade route for the starting scenario.
+- [ ] Every standard fixture generates 320 × 240 (76,800) tiles, all four zones, non-overlapping legal lots and a reachable road graph for all operating facilities.
+- [ ] The player can discover and select at least 40 distinct, viable AI buyers and/or suppliers initially and at each completed day in the standard 30-day scenario.
+- [ ] Entrants, firm growth/retrenchment, insolvency, liquidation and company closure produce stable historical IDs, correct financial/asset events and no disappearing pending orders.
+- [ ] 320 × 240 map renders with viewport-culling, successful hit-tests and usable navigation/accessibility on representative school devices.
 - [ ] Invalid building-zone combinations are rejected without state changes.
 - [ ] Only an owning company can build on a lot.
 - [ ] Two accepted orders cannot reserve the same stock unit twice.
@@ -699,46 +705,26 @@ The release is accepted only if all ten steps work without manually editing game
 
 ## 17. Implementation Roadmap
 
-### Milestone A — Deterministic economy and first order
+**Release 1.0 is a single complete delivery, not a sequence of smaller public releases.** [ROADMAP.md](./ROADMAP.md) contains the implementation milestones M00–M09, and [TODO.md](./TODO.md) contains their issue-ready task IDs. Every system is designed from T0 for the full target.
 
-Deliver:
-- Data catalog, seed/PRNG, world/lot generator, company and facility models.
-- Inventory, basic seller offers, order confirmation, dispatch, delivery, receipt, and settlement.
-- One playable product chain and one AI supplier.
-- Minimal map, company summary, order creation, and advance-day control.
-
-**Exit criterion:** student can place a valid PO, receive stock, and observe correct cash and inventory changes across a reproducible scenario.
-
-### Milestone B — Complete classroom economy
-
-Deliver:
-- All four zones and facility types.
-- Fruit, cheese, and furniture starter chains.
-- Manufacturing/extraction, internal transfers, household demand, retail sales, and AI competitors.
-- Profit/ROI accounting, property purchase/building, order views, and performance dashboard.
-
-**Exit criterion:** a 30-day scenario can be completed using at least one supply chain and one expansion, with financial consistency verified by tests.
-
-### Milestone C — Teaching and publication
-
-Deliver:
-- Tutorials, glossary, teacher scenario presets, local save/load, and JSON/CSV report export.
-- Accessibility improvements, simulation regression fixtures, responsive layout.
-- GitHub CI for type-check/build/tests and Vercel deployment.
-
-**Exit criterion:** a teacher can provide one seed to a class, students can complete the activity independently, and reports show assessable learning evidence.
+- M00–M01: establish complete domain, schema, PRNG and event contracts for large-scale geography and evolving companies.
+- M02: deliver seeded 320 × 240 terrain, roads, lots, districts, 40+ starting trade counterparties and geographic invariants.
+- M03–M05: deliver stock, finance, procurement, logistics, production, demand and multi-category products.
+- M06: deliver company AI plus entry, expansion, retrenchment, liquidation, closure and the minimum trading-market guarantee.
+- M07–M08: deliver chunked map renderer, searchable company directory, accessible UI, local persistence and classroom assessment.
+- M09: verify the full end-to-end economy, performance, deterministic replay, teacher paths and Vercel release.
 
 ## 18. Design Decisions and Open Questions
 
 ### Confirmed baseline decisions
 
 - A single city and single player-run company per local game.
-- Three AI companies in the classroom scenario; quantity configurable.
+- At least 40 trade-accessible AI companies at each completed day in standard presets, with funded founding and explicit closure/lifecycle; count and strategy parameters remain configurable upward.
 - All B2B trades require traceable orders; no instantaneous stock teleportation.
-- Four zones; residential construction prohibited.
-- Store/factory/farm/warehouse building types.
+- Default city 320 × 240 tiles with roads, districts and variable-size lots; four zones and residential construction prohibited.
+- Store/factory/farm/warehouse building types; companies may acquire, expand, retire and transfer facilities through recorded transactions.
 - Revenue, simplified net profit, and ROI are headline metrics; cash is visible separately.
-- Browser-only TypeScript implementation on GitHub/Vercel, no paid AI or cloud dependency.
+- Browser-only TypeScript implementation on GitHub/Vercel; Canvas 2D chunk rendering and verified local assets; no paid AI or cloud dependency.
 - Seeded deterministic simulation and replayability.
 - Brazilian Portuguese gameplay and English technical artifacts.
 
