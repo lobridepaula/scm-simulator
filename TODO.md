@@ -19,12 +19,12 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] **M00-T01** Inventory every committed Release 1.0 requirement in `SPEC.md` §§3–16 and map it to milestone, module, acceptance test and observable learning outcome; distinguish mandatory, SHOULD, optional and excluded scope.
 - [ ] **M00-T02** Reconcile `SPEC.md` §17 and `README.md` with the **single complete Release 1.0** strategy; link `ROADMAP.md` and `TODO.md`; avoid “MVP,” “first playable release,” or separate partial releases as delivery promises.
-- [ ] **M00-T03** Record architecture decisions for bounded contexts, single state authority, typed command/event contracts, daily phase ordering, stable IDs, PRNG stream partitioning and projected views.
+- [ ] **M00-T03** Record decisions for bounded contexts, authority/state, typed commands/events, the **11-phase scheduler**, company lifecycle/insolvency and liquidation, 320×240 lot/road/chunk data structures, PRNG streams and projected views.
 - [ ] **M00-T04** Resolve accounting and logistics ambiguities **before coding**: inventory costing method; asset capitalization and valuation; custody/title during transit; exact recognition/payment boundaries; cash reservation and freight payer; handling pending obligations and insolvency; idempotency keys.
-- [ ] **M00-T05** Define product/scenario/save/report schema version policy, deterministic migration/rejection rules and catalog data ownership; define how teacher presets constrain permitted actions.
+- [ ] **M00-T05** Define product/scenario/save/report schema versions, migration/rejection rules, broad connected product catalog, funded entrant profiles, 40-counterparty market floor, teacher presets and scenario feasibility validation.
 - [ ] **M00-T06** Establish React + Vite + strict TypeScript project structure matching `SPEC.md` §14, with domain/UI/persistence isolation and path aliases if justified.
 - [ ] **M00-T07** Configure package scripts (`dev`, `build`, `typecheck`, `lint`, `test`, `test:e2e`), formatting conventions, GitHub CI, protected review practices and deterministic test seed fixtures.
-- [ ] **M00-T08** Define complete UI information architecture, reusable tokens/components, map interaction contract and pt-BR localization approach; include keyboard, focus and screen-reader requirements.
+- [ ] **M00-T08** Define UI architecture, 320×240 Canvas viewport/chunk renderer and local asset manifest/provenance contract, supplier/customer company directory, overlays, pt-BR localization, keyboard/focus/screen-reader behavior.
 - [ ] **M00-T09** Define pedagogical objective → game action/event → report evidence → rubric mapping, including a fixed-seed cheese assignment and alternative fruit/furniture scenarios.
 - [ ] **M00-T10** Write architectural dependency checks and milestone acceptance test plan; document nonfunctional target measurements for classroom devices instead of assuming arbitrary performance thresholds.
 
@@ -47,17 +47,19 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M02 — City, lots, facilities and accessibility
 
-- [ ] **M02-T01** Define and validate generation config (dimensions, roads, zone distribution, lot sizes, districts, starting facilities) with version identifier.
-- [ ] **M02-T02** Implement seeded, deterministic road graph and shortest-path route/distance calculations; reject unreachable business routes.
-- [ ] **M02-T03** Generate all four zones with contiguous districts, legal lots, residential clusters and guaranteed starter-supplier connectivity.
+- [ ] **M02-T01** Define and validate generator version/config defaulting to **320 × 240 (76,800 tiles)**, road hierarchy, districts, zones, variable-size lot footprints, starting firms/facilities and reproducible seeds.
+- [ ] **M02-T02** Implement deterministically seeded arterial/collector/local road graph, connected access nodes and cached shortest-path distance/routing; reject unreachable firms/shipments.
+- [ ] **M02-T03** Generate four zones, coherent economic districts, residential demand clusters, non-overlapping contiguous lots of varied footprints and legal access to all active establishments.
 - [ ] **M02-T04** Calculate accessible-demand/footfall indices and nonnegative land prices from documented scenario-configured parameters.
-- [ ] **M02-T05** Define lot ownership, purchase eligibility, legal zoning and building placement rules; support the one-building-per-lot constraint.
+- [ ] **M02-T05** Define immutable lot IDs, footprints, owner/asset records, zoning/access/collision constraints, purchase and redevelopment eligibility, one operating facility per lot, and recorded transfer on firm closure.
 - [ ] **M02-T06** Implement store/factory/farm/warehouse base entities with ownership, parent lot, status, capacity, operating cost and allowed operations.
-- [ ] **M02-T07** Provision player starter store and three AI company networks from validated scenario data without giving them undocumented privileges.
-- [ ] **M02-T08** Provide deterministic map/facility read projections for SVG or Canvas rendering and list-based facility navigation.
-- [ ] **M02-T09** Test diverse seeds for connectivity, all zone types, road reachability, zoning restrictions, no duplicate lot IDs, and deterministic land values.
+- [ ] **M02-T07** Provision player starter store and **40+ distinct trade-accessible AI companies** across connected product categories, each with legal sites, documented startup equity, road access and viable offer/request profiles; reject nonviable seeds.
+- [ ] **M02-T08** Provide chunkable Canvas 2D viewport projections, spatial lot/facility indices, stable visual asset IDs and company/facility list navigation independently of the map.
+- [ ] **M02-T09** Test multiple 320×240 seeds for 76,800 tiles, all zones, contiguous/non-overlapping lot footprints, valid road access for 40+ firms, atomic placement rejection, deterministic lot values and paths.
 
-**M02 exit:** valid cities with complete structural constraints, stable generation and route-aware ownership/placement.
+- [ ] **M02-T10** Benchmark full-map generation, route queries and spatial indices on representative classroom hardware; record baseline memory and time budgets.
+
+**M02 exit:** valid reproducible 320×240 cities, 40+ viable starting AI counterparts, legal ownership/placement and efficient spatial projections.
 
 ## M03 — Inventory, commitments and financial integrity
 
@@ -67,7 +69,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 - [ ] **M03-T04** Implement cash/equity balances, earmarked purchase-plus-freight commitments and available-to-spend validation across every payment-capable command.
 - [ ] **M03-T05** Implement financial ledger with idempotent posting keys and entries for equity, land/building assets, stock acquisitions, sales, COGS, freight and expenses.
 - [ ] **M03-T06** Implement lot/building asset purchases as cash-to-asset changes, never immediate operating losses; verify accounting reconciliation.
-- [ ] **M03-T07** Implement daily fixed expenses, obligation recording, insolvency/suspension and player-facing reasons without silently creating negative cash.
+- [ ] **M03-T07** Implement expenses, unpaid obligations, financial insolvency/suspension and reasons; expose status as authority for the later company lifecycle/liquidation workflow, without negative cash.
 - [ ] **M03-T08** Implement ledger-derived revenue, simplified net profit, ROI, cash, assets and operational KPI projections with explicit period/denominator metadata.
 - [ ] **M03-T09** Test money arithmetic in BRL cents, rounding, stock valuation, negative profit, reserved funds, reconciliation and no double posting.
 
@@ -90,7 +92,7 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M05 — Production, extraction, household demand and retail
 
-- [ ] **M05-T01** Implement configurable recipes, facility permissions, input/output quantities, daily batch limits and processing costs.
+- [ ] **M05-T01** Implement broad multi-category connected product/recipe catalog, permitted sources/buyers, facility permissions, input/output quantities, daily limits and costs, while preserving guided fruit/cheese/furniture chains.
 - [ ] **M05-T02** Implement farm production/resource extraction with output capacity, cash/operating cost and legitimate inventory valuation.
 - [ ] **M05-T03** Implement factory production with exact input consumption, processing cost capitalization, no negative stock, and outputs eligible only after the proper scheduler boundary.
 - [ ] **M05-T04** Implement warehouse storage, dispatch and transfer flows using the same inventory/capacity rules; no manufacturing or household sales there.
@@ -104,24 +106,30 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 ## M06 — Autonomous competitors and competitive markets
 
-- [ ] **M06-T01** Define three AI companies and configurable deterministic strategies (stock target, price sensitivity, supplier choice, reliability weighting, risk tolerance).
+- [ ] **M06-T01** Implement **40+ independent initial AI counterparties** and configurable deterministic sector-aware strategies (stock, price, supplier/customer choice, reliability, expansion, closure and risk tolerance).
 - [ ] **M06-T02** Ensure AI submits the **same typed commands** as the player and passes identical funds/stock/capacity/ownership rules.
 - [ ] **M06-T03** Implement AI offer publication, order confirmation/rejection, replenishment and purchasing from either AI or player suppliers.
 - [ ] **M06-T04** Implement production planning, stock-aware retail pricing, household market competition and response to shortages.
-- [ ] **M06-T05** Implement stable company-ID decision order, commitment tie-breaks, bounded rule evaluation and no knowledge of future random events.
+- [ ] **M06-T05** Implement stable company-ID decision/tie-break order, cadence-based bounded AI and market ecology evaluation, indexed offers/districts, dedicated entry PRNG stream and no future event knowledge.
 - [ ] **M06-T06** Verify complementary and competing supply networks, including competitor-as-customer, competitor-as-supplier and AI-to-AI purchase chains.
-- [ ] **M06-T07** Run 30-day seeded regression campaigns and assert invariants, repeatable events/KPIs, no subsidies unless scenario-documented, and no deadlocks.
+- [ ] **M06-T07** Run 30-day seeded campaigns of 40+ AI firms and assert valid trades, outcomes, market-floor maintenance, reproducible histories, funded entrants, no unrecorded resource creation and no deadlocks.
 
-**M06 exit:** three AI companies sustainably participate in competitive and cooperative markets under common rules.
+- [ ] **M06-T08** Implement firm lifecycle states, deterministic entry scoring (unmet demand, margin, competition, route, available lots and funded equity) and explicit founding events.
+- [ ] **M06-T09** Implement expansion, new facility purchase, retrenchment, closure decisions and legal property/asset ownership transitions using ordinary typed commands.
+- [ ] **M06-T10** Implement distress, insolvency, liquidation, pending-order/cash/stock/shipment resolution, idempotent closure and historical company retention.
+- [ ] **M06-T11** Implement viable reserve entrant pipeline enforcing >=40 road-reachable, selectable AI counterparties at initial and completed-day boundaries; report infeasible presets instead of faking resources.
+- [ ] **M06-T12** Test company churn, order/ledger conservation, asset transfer, replay after save/load, market access after exits, entrant capital traceability and bounded performance.
+
+**M06 exit:** 40+ viable and trade-accessible AI firms coexist with reproducible entry/exit, legitimate liquidation and accessible supplier/customer choices.
 
 ## M07 — Complete UI and player interaction
 
 - [ ] **M07-T01** Finalize the app shell, navigation, loading/error/empty states, localized status messaging and complete pt-BR labels/glossary hooks.
-- [ ] **M07-T02** Build 2D city map with pan/zoom, roads, districts, lots, facility/owner visuals, selection details and valid construction actions.
+- [ ] **M07-T02** Build viewport-culled/chunked Canvas 2D rendering for 320×240 tiles; pan/zoom, road/district/lot/owner/facility visibility, zone/land-value/accessibility/competition overlays, selection and valid construction.
 - [ ] **M07-T03** Build searchable/list-based facility navigation and ownership/zone/capacity/price/production panels accessible independently of the map.
 - [ ] **M07-T04** Build complete Orders experience: supplier comparison, draft/submit, PO/SO mirrored views, transfers, shipment timeline, cancellation and localized rejection explanations.
 - [ ] **M07-T05** Build Company Dashboard: revenue, simplified profit, ROI formula breakdown, cash, trends, expense/commitment alerts and facility portfolio.
-- [ ] **M07-T06** Build Market and Inventory panels: competing offers, landed costs, ETA, on-hand/committed quantities, recipe availability, replenishment/price actions.
+- [ ] **M07-T06** Build searchable directory for 40+ AI buyers/suppliers, firm status/history and competitive offers; compare landed cost and ETA alongside inventory, committed stock, recipes, replenishment and price actions.
 - [ ] **M07-T07** Integrate pause/advance day, optional multi-day confirmation, event/day summary and actionable insolvency or stockout explanations.
 - [ ] **M07-T08** Run keyboard, focus visibility, contrast, reduced-motion, non-color coding and desktop/tablet responsive audits on critical player paths.
 - [ ] **M07-T09** Add browser E2E coverage for every major screen and player action; assert UI results against authoritative engine state rather than mocked numbers.
@@ -146,11 +154,11 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 
 - [ ] **M09-T01** Automate every invariant in `SPEC.md` §16.1 with sufficient seed/command fixtures, including exactly-once events and financial-vs-inventory reconciliation.
 - [ ] **M09-T02** Automate the full ten-step teacher scenario in `SPEC.md` §16.2 using a fixed cheese seed, plus regression scenarios for fruit and furniture.
-- [ ] **M09-T03** Exercise 30-day campaigns with three AI companies and hostile/fault inputs; verify deterministic replay, no duplicate IDs, no invalid state and acceptable execution time.
+- [ ] **M09-T03** Exercise 30-day campaigns on 320×240 cities with 40+ AI firms, entrant and closure events, insolvency, pending shipments, invalid inputs and deterministic replay; assert no duplicate IDs or invalid state.
 - [ ] **M09-T04** Audit keyboard/screen-reader experience, contrast, responsive layouts, locale formatting, help text, product units and no-color-only warnings.
 - [ ] **M09-T05** Audit data privacy, untrusted JSON/CSV handling, safe import limits, runtime error recovery and no requirement for login or secret services.
-- [ ] **M09-T06** Establish and measure performance budgets on documented representative school hardware; optimize simulation and rendering without changing observable rule outcomes.
-- [ ] **M09-T07** Configure Vercel static project, connect GitHub, verify preview/prod builds, routing/assets, environment independence and real deployed gameplay.
+- [ ] **M09-T06** Measure full 76,800-tile viewport/chunk rendering, pan/zoom, route lookups, 40+ firm daily advances, startup generation and save/load on school hardware; optimize without changing economic outcomes.
+- [ ] **M09-T07** Verify redistributed visual assets and license manifest, configure Vercel static project, preview/prod builds, locally served sprite paths, routing and deployed gameplay.
 - [ ] **M09-T08** Update README setup/build/test/deploy instructions; verify `SPEC.md` ↔ `ROADMAP.md` ↔ `TODO.md` ↔ implemented behavior, and update curriculum caveats.
 - [ ] **M09-T09** Verify no critical/high release blockers; tag/version Release 1.0 and record release notes, known limitations within explicit scope, and test evidence.
 
@@ -159,12 +167,12 @@ Checklists are ordered primarily by dependency. IDs `Mxx-Tyy` are stable referen
 ## 2. Acceptance checklist for the whole release
 
 - [ ] Same seed + same versions + same command history reproduces city, orders, inventory, AI behavior and KPIs.
-- [ ] All zones and facilities are implemented; legal lot acquisition and construction work.
+- [ ] All zones and facilities are implemented on a 320×240 deterministic map, with legal multi-tile lot acquisition, construction, road connectivity and culling.
 - [ ] All three product chains produce legitimate goods and retail/wholesale transactions.
 - [ ] No transaction bypasses PO/SO, shipment, receiving and settlement rules where applicable.
 - [ ] Internal transfers never create external revenue or duplicate goods.
 - [ ] Cash, commitments, assets, inventory and ledger are consistent; simplified net profit and ROI are traceable.
-- [ ] AI companies buy, sell, produce and compete without bypassing business invariants.
+- [ ] At least 40 AI counterparties are supplier/customer selectable at each standard completed-day boundary; their entry/exit/expansion/liquidation, orders, ownership and ledgers remain valid.
 - [ ] Player can complete the 30-day task through accessible pt-BR interface.
 - [ ] Teacher can assign a fixed scenario and evaluate gameplay decisions through a local export.
 - [ ] Save/load and import/export preserve pending orders, financial data, PRNG state and replay behavior.
